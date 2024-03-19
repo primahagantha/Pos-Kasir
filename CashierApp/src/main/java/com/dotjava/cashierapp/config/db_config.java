@@ -1,11 +1,10 @@
-package com.dotjava.cashierapp.controller;
+package com.dotjava.cashierapp.config;
 
 import java.sql.DriverManager;
 import java.sql.Connection;
-import java.sql.SQLException;
 
-public class dbController {
-    static Connection conn;
+public class db_config {
+    public static Connection conn;
 
     static final String JDBC_URL = "jdbc:mysql://localhost/cashier_db";
     static final String username = "root";

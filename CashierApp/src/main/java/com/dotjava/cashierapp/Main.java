@@ -1,10 +1,10 @@
 package com.dotjava.cashierapp;
 
+import com.dotjava.cashierapp.config.db_config;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import com.dotjava.cashierapp.controller.dbController;
 
 import java.io.IOException;
 
@@ -19,7 +19,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        dbController.initDBConnection();
+        db_config.initDBConnection();
         launch();
     }
 }

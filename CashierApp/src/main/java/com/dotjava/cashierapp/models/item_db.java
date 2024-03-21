@@ -36,11 +36,34 @@ public class item_db {
             }
 
             return tempArrItem;
-//            return null;
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+
+    public static Item getItemByCode(int code){
+        Item tempBarang = new Item();
+
+        try {
+            boolean isDataFound = false;
+
+            for (Item i : tempArrItem) {
+                if (i.getCode().equals(Integer.toString(code))){
+                    isDataFound = true;
+                    return i;
+                }
+            }
+            if (!isDataFound){
+                return null;
+            }
+        }catch (Error e){
+            System.out.println(e);
+            return null;
+        }
+        return null;
+    }
+
 
 
 

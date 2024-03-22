@@ -1,19 +1,27 @@
 package com.dotjava.cashierapp.controller;
 
+import com.dotjava.cashierapp.ItemBought;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import com.dotjava.cashierapp.Item;
 import com.dotjava.cashierapp.models.item_db;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.input.InputMethodEvent;
+import javafx.util.converter.IntegerStringConverter;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Observable;
 import java.util.ResourceBundle;
 
-public class cashierController {
+public class cashierController implements Initializable {
     ArrayList <Item> dataBarang = item_db.getAllItems();
-    ArrayList <Item> keranjang = new ArrayList<Item>();
+    ObservableList <ItemBought>  keranjang = FXCollections.observableArrayList();
 
     @FXML
     private TextField input_user;
@@ -28,15 +36,21 @@ public class cashierController {
     private Label message;
 
     @FXML
-    private TableView<Item> table_data;
+    private TableView<ItemBought> table_data;
 
-    @FXML private TableColumn<Item, Integer> table_no;
-    @FXML private TableColumn<Item, String> table_code;
-    @FXML private TableColumn<Item, String> table_name;
-    @FXML private TableColumn<Item, String> table_single_price;
-    @FXML private TableColumn<Item, Integer> table_amount;
-    @FXML private TableColumn<Item, Integer> table_total;
-    @FXML private TableColumn<Item, String> table_action;
+//    @FXML private TableColumn<ItemBought, Integer> table_no;
+    @FXML private TableColumn<ItemBought, String> table_code;
+    @FXML private TableColumn<ItemBought, String> table_name;
+    @FXML private TableColumn<ItemBought, String> table_single_price;
+    @FXML private TableColumn<ItemBought, Integer> table_amount;
+    @FXML private TableColumn<ItemBought, Integer> table_total;
+    @FXML private TableColumn<ItemBought, String> table_action;
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        loadData();
+        table_amount.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+    }
 
     @FXML
     protected void getAllItemsButton() {
@@ -55,7 +69,6 @@ public class cashierController {
     protected void getItemByCode(javafx.event.ActionEvent actionEvent) {
 
         try{
-            getKerangjang();
             int code = Integer.parseInt(input_user.getText());
 
             Item selectedItem =  item_db.getItemByCode(code);
@@ -67,7 +80,15 @@ public class cashierController {
                     }
                 }
 
-                keranjang.add(selectedItem);
+                ItemBought soldItem = new ItemBought();
+                soldItem.setName(selectedItem.getName());
+                soldItem.setPrice(selectedItem.getPrice());
+                soldItem.setCode(selectedItem.getCode());
+                soldItem.setJumlah(1);
+
+                keranjang.add(soldItem);
+                table_data.setItems(keranjang);
+
                 nama_barang.setText("Nama : " +  selectedItem.getName());
                 harga_barang.setText("Harga : " +  Integer.toString(selectedItem.getPrice()));
 
@@ -89,25 +110,29 @@ public class cashierController {
     }
 
     @FXML
-    protected void getKerangjang(){
-        for (Item i: keranjang) {
-            table_data.getItems().add(i);
-        }
+    public void loadData  () {
+
+//        table_no.setCellValueFactory(new PropertyValueFactory<ItemBought, Integer>("table_no"));
+        table_code.setCellValueFactory(new PropertyValueFactory<ItemBought, String>("code"));
+        table_name.setCellValueFactory(new PropertyValueFactory<ItemBought, String>("name"));
+        table_single_price.setCellValueFactory(new PropertyValueFactory<ItemBought, String>("price"));
+        table_amount.setCellValueFactory(new PropertyValueFactory<ItemBought, Integer>("jumlah"));
+        table_total.setCellValueFactory(new PropertyValueFactory<ItemBought, Integer>("total"));
+//        table_action.setCellValueFactory(new PropertyValueFactory<ItemBought, String>("table_action"));
+
+
     }
 
-    @FXML
-    public void getKeranjang() {
-        table_no.setCellValueFactory(new PropertyValueFactory<Item, Integer>("table_no"));
-        table_code.setCellValueFactory(new PropertyValueFactory<Item, String>("table_code"));
-        table_name.setCellValueFactory(new PropertyValueFactory<Item, String>("table_name"));
-        table_single_price.setCellValueFactory(new PropertyValueFactory<Item, String>("table_single_price"));
-        table_amount.setCellValueFactory(new PropertyValueFactory<Item, Integer>("table_amount"));
-        table_total.setCellValueFactory(new PropertyValueFactory<Item, Integer>("table_total"));
-        table_action.setCellValueFactory(new PropertyValueFactory<Item, String>("table_action"));
-
-        for (Item i: keranjang) {
-            table_data.getItems().add(i);
-        }
+    public void setJumlah(TableColumn.CellEditEvent<ItemBought, Integer> itemBoughtIntegerCellEditEvent) {
+        ItemBought editedItemBought = table_data.getSelectionModel().getSelectedItem();
+        editedItemBought.setJumlah(itemBoughtIntegerCellEditEvent.getNewValue());
+//        set total cell to update immediately when there is any change in amount cell
+//        table_data.getItems().set(1, editedItemBought);
     }
 
+    public void getTotalCellValue(InputMethodEvent inputMethodEvent) {
+
+        System.out.println("changed detected");
+
+    }
 }

@@ -59,15 +59,14 @@
    </VBox>
    <VBox fillWidth="false" prefHeight="374.0" prefWidth="430.0">
       <children>
-         <TableView fx:id="table_data" prefHeight="366.0" prefWidth="724.0">
+         <TableView fx:id="table_data" editable="true" onInputMethodTextChanged="#getTotalCellValue" prefHeight="366.0" prefWidth="724.0">
            <columns>
-             <TableColumn fx:id="table_no" editable="false" prefWidth="26.4000244140625" text="No" />
-             <TableColumn fx:id="table_code" editable="false" prefWidth="111.99996566772461" text="Kode" />
-               <TableColumn fx:id="table_name" editable="false" prefWidth="200.8000030517578" text="Nama" />
-               <TableColumn fx:id="table_single_price" editable="false" prefWidth="88.79998779296875" text="Harga Satuan" />
-               <TableColumn fx:id="table_amount" editable="true" prefWidth="95.20001220703125" text="Jumlah" />
-               <TableColumn fx:id="table_total" editable="false" prefWidth="113.5999755859375" text="Total" />
-               <TableColumn fx:id="table_action" editable="false" prefWidth="72.79996337890623" text="Action" />
+             <TableColumn fx:id="table_code" editable="false" prefWidth="111.99996566772461" style="-fx-alignment: CENTER;" text="Kode" />
+               <TableColumn fx:id="table_name" editable="false" prefWidth="200.8000030517578" style="-fx-alignment: CENTER;" text="Nama" />
+               <TableColumn fx:id="table_single_price" editable="false" prefWidth="88.79998779296875" style="-fx-alignment: CENTER;" text="Harga Satuan" />
+               <TableColumn fx:id="table_amount" onEditCommit="#setJumlah" prefWidth="76.79998779296875" style="-fx-alignment: CENTER;" text="Jumlah" />
+               <TableColumn fx:id="table_total" editable="false" prefWidth="132.79998779296875" style="-fx-alignment: CENTER;" text="Total" />
+               <TableColumn fx:id="table_action" editable="false" prefWidth="72.79996337890623" style="-fx-alignment: CENTER;" text="Action" />
            </columns>
          </TableView>
       </children>

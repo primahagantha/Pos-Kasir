@@ -14,7 +14,7 @@ public class Main extends Application {
     public static Scene scene;
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("index.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("admin.fxml"));
         scene = new Scene(fxmlLoader.load(), 600, 400);
         stage.setTitle("Admin Page");
         stage.setScene(scene);

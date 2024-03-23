@@ -3,6 +3,7 @@ package com.dotjava.cashierapp.controller;
 import com.dotjava.cashierapp.ItemBought;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -23,23 +24,19 @@ public class cashierController implements Initializable {
     ArrayList <Item> dataBarang = item_db.getAllItems();
     ObservableList <ItemBought>  keranjang = FXCollections.observableArrayList();
 
-    @FXML
-    private TextField input_user;
+    @FXML private TextField input_user;
 
-    @FXML
-    private Label totalBelanja;
+    @FXML private TextField inputPembayaranCell;
 
-    @FXML
-    private Label nama_barang;
+    @FXML private Label totalBelanja;
 
-    @FXML
-    private Label harga_barang;
+    @FXML private Label nama_barang;
 
-    @FXML
-    private Label message;
+    @FXML private Label harga_barang;
 
-    @FXML
-    private TableView<ItemBought> table_data;
+    @FXML private Label message;
+
+    @FXML private TableView<ItemBought> table_data;
 
 //    @FXML private TableColumn<ItemBought, Integer> table_no;
     @FXML private TableColumn<ItemBought, String> table_code;
@@ -91,10 +88,10 @@ public class cashierController implements Initializable {
 
                 keranjang.add(soldItem);
                 table_data.setItems(keranjang);
-                countTotalBelanja();
 
                 nama_barang.setText("Nama : " +  selectedItem.getName());
                 harga_barang.setText("Harga : " +  Integer.toString(selectedItem.getPrice()));
+                totalBelanja.setText("Total Belanja :   " + Integer.toString(countTotalBelanja()));
 
                 message.setText("=> Data berhasil diinput");
                 System.out.println("Data berhasil diinput");
@@ -113,12 +110,12 @@ public class cashierController implements Initializable {
         }
     }
 
-    public void countTotalBelanja(){
+    public Integer countTotalBelanja(){
         Integer totalBelanjaKeranjang = 0;
         for (ItemBought i: keranjang) {
             totalBelanjaKeranjang += i.getTotal();
         }
-        totalBelanja.setText("Total Belanja :   " + Integer.toString(totalBelanjaKeranjang));
+        return  totalBelanjaKeranjang;
     }
 
     @FXML
@@ -134,9 +131,27 @@ public class cashierController implements Initializable {
     public void setJumlah(TableColumn.CellEditEvent<ItemBought, Integer> itemBoughtIntegerCellEditEvent) {
         ItemBought editedItemBought = table_data.getSelectionModel().getSelectedItem();
         editedItemBought.setJumlah(itemBoughtIntegerCellEditEvent.getNewValue());
-        countTotalBelanja();
+        totalBelanja.setText("Total Belanja :   " + Integer.toString(countTotalBelanja()));
         table_data.refresh();
     }
 
 
+    public void itemTransaction(ActionEvent actionEvent) {
+        try{
+            int uangDiberi = Integer.parseInt(inputPembayaranCell.getText());
+            int tagihan = countTotalBelanja();
+
+            if(uangDiberi < tagihan){
+                throw new Exception("Uang yang diinput tidak cukup untuk melakukan transaksi");
+            }
+
+        }catch (NumberFormatException e) {
+            message.setText("=> Invalid Code Format");
+            System.out.println("Invalid Code Format");
+        }
+        catch (Exception e){
+            message.setText("=> " + e.getMessage());
+            System.out.println("=> " + e.getMessage());
+        }
+    }
 }

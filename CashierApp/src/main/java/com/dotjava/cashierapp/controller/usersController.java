@@ -2,9 +2,20 @@ package com.dotjava.cashierapp.controller;
 
 import com.dotjava.cashierapp.User;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import com.dotjava.cashierapp.service.password_service;
 import com.dotjava.cashierapp.models.user_db;
+
+//import com.dotjava.cashierapp.controller.sceneController;
+import com.dotjava.cashierapp.Main;
+import javafx.scene.layout.AnchorPane;
+
+import java.awt.event.ActionEvent;
+import java.io.IOException;
+
+import static com.dotjava.cashierapp.Main.setRoot;
+import static com.dotjava.cashierapp.controller.sceneController.switchToMainApp;
 
 public class usersController {
 
@@ -12,9 +23,11 @@ public class usersController {
     @FXML TextField passwordData;
     @FXML TextField nameData;
     @FXML TextField confirmPasswordData;
+    @FXML
+    AnchorPane rootPane;
 
 
-    public void loginUser(){
+    public void loginUser(javafx.event.ActionEvent actionEven) {
         String username = usernameData.getText();
         String candidatePassword = passwordData.getText();
 
@@ -26,6 +39,7 @@ public class usersController {
             }
 
             if(password_service.validatePassword(candidatePassword, UserData.getPassword())){
+                switchToMainApp(actionEven);
                 System.out.println("Login Success");
             }else{
                 throw new Exception("Username / Password Incorrect !");
@@ -70,5 +84,4 @@ public class usersController {
 
 
     }
-
 }

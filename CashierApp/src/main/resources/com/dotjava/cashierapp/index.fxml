@@ -59,14 +59,14 @@
    </VBox>
    <VBox fillWidth="false" prefHeight="374.0" prefWidth="430.0">
       <children>
-         <TableView fx:id="table_data" editable="true" onInputMethodTextChanged="#getTotalCellValue" prefHeight="366.0" prefWidth="724.0">
+         <TableView fx:id="table_data" editable="true" prefHeight="366.0" prefWidth="724.0">
            <columns>
-             <TableColumn fx:id="table_code" editable="false" prefWidth="111.99996566772461" style="-fx-alignment: CENTER;" text="Kode" />
-               <TableColumn fx:id="table_name" editable="false" prefWidth="200.8000030517578" style="-fx-alignment: CENTER;" text="Nama" />
-               <TableColumn fx:id="table_single_price" editable="false" prefWidth="88.79998779296875" style="-fx-alignment: CENTER;" text="Harga Satuan" />
-               <TableColumn fx:id="table_amount" onEditCommit="#setJumlah" prefWidth="76.79998779296875" style="-fx-alignment: CENTER;" text="Jumlah" />
-               <TableColumn fx:id="table_total" editable="false" prefWidth="132.79998779296875" style="-fx-alignment: CENTER;" text="Total" />
-               <TableColumn fx:id="table_action" editable="false" prefWidth="72.79996337890623" style="-fx-alignment: CENTER;" text="Action" />
+             <TableColumn fx:id="table_code" editable="false" prefWidth="69.60000991821289" style="-fx-alignment: CENTER;" text="Kode" />
+               <TableColumn fx:id="table_name" editable="false" prefWidth="240.8000030517578" style="-fx-alignment: CENTER;" text="Nama" />
+               <TableColumn fx:id="table_single_price" editable="false" prefWidth="126.39996337890625" style="-fx-alignment: CENTER;" text="Harga Satuan" />
+               <TableColumn fx:id="table_amount" onEditCommit="#setJumlah" prefWidth="89.60003662109375" style="-fx-alignment: CENTER;" text="Jumlah" />
+               <TableColumn fx:id="table_total" editable="false" prefWidth="127.20001220703125" style="-fx-alignment: CENTER;" text="Total" />
+               <TableColumn fx:id="table_action" editable="false" prefWidth="64.800048828125" style="-fx-alignment: CENTER;" text="Action" />
            </columns>
          </TableView>
       </children>
@@ -76,7 +76,7 @@
          <Insets top="-20.0" />
       </VBox.margin>
       <children>
-         <Label contentDisplay="RIGHT" prefHeight="18.0" prefWidth="254.0" text="Total Belanja : ">
+         <Label fx:id="totalBelanja" contentDisplay="RIGHT" prefHeight="18.0" prefWidth="254.0" text="Total Belanja : ">
             <font>
                <Font name="Arial Black" size="12.0" />
             </font>

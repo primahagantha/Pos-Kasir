@@ -27,6 +27,9 @@ public class cashierController implements Initializable {
     private TextField input_user;
 
     @FXML
+    private Label totalBelanja;
+
+    @FXML
     private Label nama_barang;
 
     @FXML
@@ -88,6 +91,7 @@ public class cashierController implements Initializable {
 
                 keranjang.add(soldItem);
                 table_data.setItems(keranjang);
+                countTotalBelanja();
 
                 nama_barang.setText("Nama : " +  selectedItem.getName());
                 harga_barang.setText("Harga : " +  Integer.toString(selectedItem.getPrice()));
@@ -109,30 +113,30 @@ public class cashierController implements Initializable {
         }
     }
 
+    public void countTotalBelanja(){
+        Integer totalBelanjaKeranjang = 0;
+        for (ItemBought i: keranjang) {
+            totalBelanjaKeranjang += i.getTotal();
+        }
+        totalBelanja.setText("Total Belanja :   " + Integer.toString(totalBelanjaKeranjang));
+    }
+
     @FXML
     public void loadData  () {
-
-//        table_no.setCellValueFactory(new PropertyValueFactory<ItemBought, Integer>("table_no"));
         table_code.setCellValueFactory(new PropertyValueFactory<ItemBought, String>("code"));
         table_name.setCellValueFactory(new PropertyValueFactory<ItemBought, String>("name"));
         table_single_price.setCellValueFactory(new PropertyValueFactory<ItemBought, String>("price"));
         table_amount.setCellValueFactory(new PropertyValueFactory<ItemBought, Integer>("jumlah"));
         table_total.setCellValueFactory(new PropertyValueFactory<ItemBought, Integer>("total"));
-//        table_action.setCellValueFactory(new PropertyValueFactory<ItemBought, String>("table_action"));
-
 
     }
 
     public void setJumlah(TableColumn.CellEditEvent<ItemBought, Integer> itemBoughtIntegerCellEditEvent) {
         ItemBought editedItemBought = table_data.getSelectionModel().getSelectedItem();
         editedItemBought.setJumlah(itemBoughtIntegerCellEditEvent.getNewValue());
-//        set total cell to update immediately when there is any change in amount cell
-//        table_data.getItems().set(1, editedItemBought);
+        countTotalBelanja();
+        table_data.refresh();
     }
 
-    public void getTotalCellValue(InputMethodEvent inputMethodEvent) {
 
-        System.out.println("changed detected");
-
-    }
 }

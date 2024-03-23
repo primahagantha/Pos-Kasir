@@ -9,14 +9,41 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="639.0" prefWidth="754.0" scaleShape="false" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dotjava.cashierapp.controller.cashierController">
+<VBox alignment="CENTER" prefHeight="639.0" prefWidth="754.0" scaleShape="false" spacing="20.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dotjava.cashierapp.controller.cashierController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
+   <GridPane alignment="CENTER_RIGHT">
+     <columnConstraints>
+       <ColumnConstraints hgrow="SOMETIMES" maxWidth="696.0000366210937" minWidth="10.0" prefWidth="359.1999389648438" />
+       <ColumnConstraints hgrow="SOMETIMES" maxWidth="376.00006103515625" minWidth="10.0" prefWidth="356.00006103515625" />
+     </columnConstraints>
+     <rowConstraints>
+       <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+     </rowConstraints>
+      <children>
+         <Label text="Selamat Datang, User !" textAlignment="CENTER" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+            <font>
+               <Font name="Segoe UI" size="18.0" />
+            </font>
+            <GridPane.margin>
+               <Insets left="5.0" />
+            </GridPane.margin>
+         </Label>
+         <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="58.0" style="-fx-background-color: red;" text="Logout" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+            <font>
+               <Font name="Segoe UI Black" size="12.0" />
+            </font>
+         </Button>
+      </children>
+   </GridPane>
 
    <VBox prefHeight="74.0" prefWidth="430.0">
       <children>
@@ -39,6 +66,9 @@
                   </HBox.margin>
                </Label>
             </children>
+            <opaqueInsets>
+               <Insets top="-5.0" />
+            </opaqueInsets>
          </HBox>
          <Separator orientation="VERTICAL" prefHeight="1.0" prefWidth="94.0" />
          <SplitPane dividerPositions="0.4995335820895523" prefHeight="28.0" prefWidth="430.0">
@@ -68,6 +98,9 @@
                <TableColumn fx:id="table_total" editable="false" prefWidth="127.20001220703125" style="-fx-alignment: CENTER;" text="Total" />
                <TableColumn fx:id="table_action" editable="false" prefWidth="64.800048828125" style="-fx-alignment: CENTER;" text="Action" />
            </columns>
+            <VBox.margin>
+               <Insets top="-5.0" />
+            </VBox.margin>
          </TableView>
       </children>
    </VBox>

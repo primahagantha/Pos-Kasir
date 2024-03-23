@@ -29,7 +29,7 @@
        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
      </rowConstraints>
       <children>
-         <Label text="Selamat Datang, User !" textAlignment="CENTER" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+         <Label fx:id="welcomeText" text="Selamat Datang, User !" textAlignment="CENTER" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
             <font>
                <Font name="Segoe UI" size="18.0" />
             </font>
@@ -37,7 +37,7 @@
                <Insets left="5.0" />
             </GridPane.margin>
          </Label>
-         <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="58.0" style="-fx-background-color: red;" text="Logout" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+         <Button onAction="#logOutUser" mnemonicParsing="false" prefHeight="26.0" prefWidth="58.0" style="-fx-background-color: red;" text="Logout" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
             <font>
                <Font name="Segoe UI Black" size="12.0" />
             </font>

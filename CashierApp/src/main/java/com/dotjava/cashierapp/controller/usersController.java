@@ -1,21 +1,14 @@
 package com.dotjava.cashierapp.controller;
 
 import com.dotjava.cashierapp.User;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import com.dotjava.cashierapp.service.password_service;
 import com.dotjava.cashierapp.models.user_db;
 
-//import com.dotjava.cashierapp.controller.sceneController;
-import com.dotjava.cashierapp.Main;
-import javafx.scene.layout.AnchorPane;
-
-import java.awt.event.ActionEvent;
 import java.io.IOException;
-
-import static com.dotjava.cashierapp.Main.setRoot;
-import static com.dotjava.cashierapp.controller.sceneController.switchToMainApp;
 
 public class usersController {
 
@@ -23,9 +16,8 @@ public class usersController {
     @FXML TextField passwordData;
     @FXML TextField nameData;
     @FXML TextField confirmPasswordData;
-    @FXML
-    AnchorPane rootPane;
 
+    @FXML Label errorMessage;
 
     public void loginUser(javafx.event.ActionEvent actionEven) {
         String username = usernameData.getText();
@@ -39,18 +31,16 @@ public class usersController {
             }
 
             if(password_service.validatePassword(candidatePassword, UserData.getPassword())){
-                switchToMainApp(actionEven);
+                sceneController.switchToMainApp(actionEven);
                 System.out.println("Login Success");
             }else{
                 throw new Exception("Username / Password Incorrect !");
             }
 
         }catch (Exception e){
+            errorMessage.setText(e.getMessage());
             System.out.println(e.getMessage());
         }
-
-
-
     }
 
     public void registerUser(){
@@ -79,9 +69,18 @@ public class usersController {
             }
 
         }catch (Exception e){
+            errorMessage.setText(e.getMessage());
             System.out.println(e.getMessage());
         }
 
 
+    }
+
+    public void gotoRegister(javafx.event.ActionEvent actionEvent) throws IOException {
+        sceneController.switchToRegister(actionEvent);
+    }
+
+    public void gotoLogin(javafx.event.ActionEvent actionEvent) throws IOException {
+        sceneController.switchToLogin(actionEvent);
     }
 }

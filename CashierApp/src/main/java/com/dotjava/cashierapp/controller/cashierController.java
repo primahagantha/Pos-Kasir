@@ -10,21 +10,27 @@ import javafx.scene.control.*;
 
 import com.dotjava.cashierapp.Item;
 import com.dotjava.cashierapp.models.item_db;
+import com.dotjava.cashierapp.service.userSession_service;
+
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.InputMethodEvent;
 import javafx.util.converter.IntegerStringConverter;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.ResourceBundle;
+
 
 public class cashierController implements Initializable {
     ArrayList <Item> dataBarang = item_db.getAllItems();
     ObservableList <ItemBought>  keranjang = FXCollections.observableArrayList();
 
     @FXML private TextField input_user;
+
+    @FXML private Label welcomeText;
 
     @FXML private TextField inputPembayaranCell;
 
@@ -48,6 +54,7 @@ public class cashierController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        welcomeText.setText("Selamat Datang, " + userSession_service.getUserFullName() + " !");
         loadData();
         table_amount.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
     }
@@ -153,5 +160,10 @@ public class cashierController implements Initializable {
             message.setText("=> " + e.getMessage());
             System.out.println("=> " + e.getMessage());
         }
+    }
+
+    public void logOutUser(ActionEvent actionEvent) throws IOException {
+        userSession_service.cleanSession();
+        sceneController.switchToLogin(actionEvent);
     }
 }

@@ -7,8 +7,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import com.dotjava.cashierapp.service.password_service;
 import com.dotjava.cashierapp.models.user_db;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
+import com.dotjava.cashierapp.service.userSession_service;
 
 public class usersController {
 
@@ -31,6 +33,8 @@ public class usersController {
             }
 
             if(password_service.validatePassword(candidatePassword, UserData.getPassword())){
+                userSession_service.setUserId(UserData.getIdUser());
+                userSession_service.setUserFullName(UserData.getName());
                 sceneController.switchToMainApp(actionEven);
                 System.out.println("Login Success");
             }else{
@@ -63,6 +67,8 @@ public class usersController {
             String hashedPassword = password_service.hashPassword(password);
 
             if(user_db.Register(fullName, username, hashedPassword) == 1){
+                errorMessage.setTextFill(Color.GREEN);
+                errorMessage.setText("Registered Successfully");
                 System.out.println("Registered Successfully");
             }else {
                 System.out.println("Register Failed");

@@ -8,7 +8,24 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="dotjava.admin.ItemEntry"
+            fx:controller="dotjava.admin.controller.itemEntryController"
             prefHeight="400.0" prefWidth="600.0">
+
+    <GridPane layoutX="25.0" layoutY="25.0" prefHeight="350.0" prefWidth="550.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="385.0" minWidth="10.0" prefWidth="385.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="10.0" prefWidth="175.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="300.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+        <children>
+            <TextField fx:id="namaTextField" promptText="Masukkan Nama Item" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <TextField fx:id="hargaTextField" promptText="Masukkan Harga" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <TextArea fx:id="deskripsiTextArea" promptText="Masukkan Deskripsi" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Button fx:id="saveButton" text="Simpan" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        </children>
+    </GridPane>
 
 </AnchorPane>

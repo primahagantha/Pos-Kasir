@@ -30,4 +30,7 @@ public class Main extends Application {
         db_config.initDBConnection();
         launch();
     }
+
+    public static class transactionLog {
+    }
 }

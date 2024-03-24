@@ -5,10 +5,26 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="dotjava.admin.ActivityLog"
+            fx:controller="dotjava.admin.controller.activityLogController"
             prefHeight="400.0" prefWidth="600.0">
+
+    <VBox prefHeight="400.0" prefWidth="600.0" spacing="10.0">
+        <HBox alignment="CENTER_LEFT">
+            <Label text="Tanggal:" />
+            <DatePicker fx:id="datePicker" />
+        </HBox>
+        <TableView fx:id="tableView" prefHeight="200.0" prefWidth="600.0">
+            <columns>
+                <TableColumn fx:id="tanggalColumn" text="Tanggal" prefWidth="100.0" />
+                <TableColumn fx:id="userColumn" text="Pengguna" prefWidth="100.0" />
+                <TableColumn fx:id="waktuColumn" text="Waktu" prefWidth="100.0" />
+                <TableColumn fx:id="deskripsiColumn" text="Deskripsi" prefWidth="300.0" />
+            </columns>
+        </TableView>
+    </VBox>
 
 </AnchorPane>

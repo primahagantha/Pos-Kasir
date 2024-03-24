@@ -9,6 +9,7 @@ public class ItemBought extends Item{
     private static Integer total;
 
 
+
     public Integer getJumlah() {
         return jumlah;
     }

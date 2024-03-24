@@ -1,8 +1,11 @@
 package com.dotjava.cashierapp.models;
 
 import com.dotjava.cashierapp.Item;
+import com.dotjava.cashierapp.ItemBought;
 import com.dotjava.cashierapp.config.db_config;
+import com.dotjava.cashierapp.service.userSession_service;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -62,6 +65,24 @@ public class item_db {
             return null;
         }
         return null;
+    }
+
+    public static Integer setTransactionHistory(int id_act, int cash ,ItemBought item){
+        try{
+            String query = "INSERT INTO `transaction_history`(`id_transaction`, `id_act`, `id_item_sold`,`cash`, `total`) VALUES (?,?,?,?,?)";
+
+            PreparedStatement statement = db_config.conn.prepareStatement(query);
+
+            statement.setNull(1, java.sql.Types.NULL);
+            statement.setString(2,Integer.toString(id_act));
+            statement.setString(3, item.getCode());
+            statement.setInt(4, cash);
+            statement.setInt(5, item.getTotal());
+
+            return statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

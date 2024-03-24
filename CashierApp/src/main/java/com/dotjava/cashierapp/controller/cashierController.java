@@ -1,6 +1,7 @@
 package com.dotjava.cashierapp.controller;
 
 import com.dotjava.cashierapp.ItemBought;
+import com.dotjava.cashierapp.models.user_db;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,10 +16,13 @@ import com.dotjava.cashierapp.service.userSession_service;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.InputMethodEvent;
+import javafx.scene.paint.Color;
+import javafx.util.Callback;
 import javafx.util.converter.IntegerStringConverter;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.ResourceBundle;
@@ -44,13 +48,12 @@ public class cashierController implements Initializable {
 
     @FXML private TableView<ItemBought> table_data;
 
-//    @FXML private TableColumn<ItemBought, Integer> table_no;
     @FXML private TableColumn<ItemBought, String> table_code;
     @FXML private TableColumn<ItemBought, String> table_name;
     @FXML private TableColumn<ItemBought, String> table_single_price;
     @FXML private TableColumn<ItemBought, Integer> table_amount;
     @FXML private TableColumn<ItemBought, Integer> table_total;
-    @FXML private TableColumn<ItemBought, String> table_action;
+    @FXML private TableColumn<ItemBought, Void> table_action;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -100,18 +103,22 @@ public class cashierController implements Initializable {
                 harga_barang.setText("Harga : " +  Integer.toString(selectedItem.getPrice()));
                 totalBelanja.setText("Total Belanja :   " + Integer.toString(countTotalBelanja()));
 
+                message.setTextFill(Color.GREEN);
                 message.setText("=> Data berhasil diinput");
                 System.out.println("Data berhasil diinput");
 
             }else {
+                message.setTextFill(Color.RED);
                 message.setText("=> Data Tidak Ditemukan");
                 System.out.println("Data Tidak Ditemukan ");
             }
 
         }catch (NumberFormatException e) {
+            message.setTextFill(Color.RED);
             message.setText("=> Invalid Code Format");
             System.out.println("Invalid Code Format");
         }catch (Exception e){
+            message.setTextFill(Color.RED);
             message.setText("=> " + e.getMessage());
             System.out.println(e.getMessage());
         }
@@ -127,11 +134,48 @@ public class cashierController implements Initializable {
 
     @FXML
     public void loadData  () {
+        Callback<TableColumn<ItemBought, Void>, TableCell<ItemBought, Void>> cellFactory = new Callback<>() {
+            @Override
+            public TableCell<ItemBought, Void> call(final TableColumn<ItemBought, Void> param) {
+                return new TableCell<>() {
+                    private final Button btn = new Button("Delete");
+
+                    {
+                        btn.setStyle("-fx-background-color: red;");
+                        btn.setOnAction((ActionEvent event) -> {
+                            ItemBought data = getTableView().getItems().get(getIndex());
+                            System.out.println("Button clicked: " + data.getName() + " Deleted");
+                            keranjang.remove(getIndex());
+
+                            message.setTextFill(Color.GREEN);
+                            message.setText(data.getName() + " Deleted");
+                            totalBelanja.setText("Total Belanja :   " + Integer.toString(countTotalBelanja()));
+                            table_data.refresh();
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+            }
+        };
+
+        table_action.setCellFactory(cellFactory);
+
         table_code.setCellValueFactory(new PropertyValueFactory<ItemBought, String>("code"));
         table_name.setCellValueFactory(new PropertyValueFactory<ItemBought, String>("name"));
         table_single_price.setCellValueFactory(new PropertyValueFactory<ItemBought, String>("price"));
         table_amount.setCellValueFactory(new PropertyValueFactory<ItemBought, Integer>("jumlah"));
         table_total.setCellValueFactory(new PropertyValueFactory<ItemBought, Integer>("total"));
+//        table_action.setCellValueFactory(new PropertyValueFactory<ItemBought, Button>("total"));
+//        table_data.getColumns().add(table_action);
 
     }
 
@@ -152,11 +196,27 @@ public class cashierController implements Initializable {
                 throw new Exception("Uang yang diinput tidak cukup untuk melakukan transaksi");
             }
 
+            int insertedIdActivity = user_db.setUserActivity("TR");
+
+            for (ItemBought i: keranjang) {
+                if(item_db.setTransactionHistory(insertedIdActivity,uangDiberi, i) > 0){
+                    System.out.println("data masuk " + i.getName());
+                }else{
+                    throw new SQLException();
+                }
+            }
+
+            keranjang.clear();
+            table_data.refresh();
+            message.setTextFill(Color.GREEN);
+            message.setText("=> Pembayaran Berhasil");
+            System.out.println("Pembayaran Berhasil");
         }catch (NumberFormatException e) {
+            message.setTextFill(Color.RED);
             message.setText("=> Invalid Code Format");
             System.out.println("Invalid Code Format");
-        }
-        catch (Exception e){
+        } catch (Exception e){
+            message.setTextFill(Color.RED);
             message.setText("=> " + e.getMessage());
             System.out.println("=> " + e.getMessage());
         }

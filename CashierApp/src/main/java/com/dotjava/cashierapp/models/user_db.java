@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.dotjava.cashierapp.service.userSession_service;
+
 public class user_db {
     public static Integer Register(String name, String username, String password){
 
@@ -56,6 +58,37 @@ public class user_db {
 
             return null;
 
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static Integer setUserActivity(String actType){
+        try{
+            String query = "INSERT INTO `activity_log`(`id_act`, `tipe_act`, `id_user`, `username`, `date`) VALUES (?,?,?,?,?)";
+
+            PreparedStatement statement = db_config.conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+
+            statement.setNull(1,java.sql.Types.NULL);
+            statement.setString(2, actType);
+            statement.setString(3, userSession_service.getUserId());
+            statement.setString(4, userSession_service.getUserName());
+            statement.setNull(5, java.sql.Types.NULL);
+
+            int affectedRows = statement.executeUpdate();
+            int insertedIdActivity = 0;
+
+            if(affectedRows > 0){
+                try (ResultSet rs = statement.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        System.out.println("Inserted record's ID: " + rs.getInt(1));
+                        insertedIdActivity =  rs.getInt(1);
+                    }
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            return insertedIdActivity;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

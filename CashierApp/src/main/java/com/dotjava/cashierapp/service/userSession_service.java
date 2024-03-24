@@ -3,6 +3,7 @@ package com.dotjava.cashierapp.service;
 public class userSession_service {
     private static String userId;
     private static String userFullName;
+    private static String userName;
 
 
     public static String getUserId() {
@@ -24,6 +25,14 @@ public class userSession_service {
     public static void cleanSession(){
         userSession_service.userId = null;
         userSession_service.userFullName = null;
+    }
+
+    public static String getUserName() {
+        return userName;
+    }
+
+    public static void setUserName(String userName) {
+        userSession_service.userName = userName;
     }
 
     public String activeSession(){

@@ -37,7 +37,7 @@
                <Insets left="5.0" />
             </GridPane.margin>
          </Label>
-         <Button onAction="#logOutUser" mnemonicParsing="false" prefHeight="26.0" prefWidth="58.0" style="-fx-background-color: red;" text="Logout" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+         <Button mnemonicParsing="false" onAction="#logOutUser" prefHeight="26.0" prefWidth="58.0" style="-fx-background-color: red;" text="Logout" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
             <font>
                <Font name="Segoe UI Black" size="12.0" />
             </font>
@@ -60,10 +60,13 @@
                      <Insets left="20.0" />
                   </HBox.margin>
                </TextField>
-               <Label fx:id="message" text="=&gt;">
+               <Label fx:id="message" alignment="CENTER" contentDisplay="CENTER" text="=&gt;" textAlignment="CENTER">
                   <HBox.margin>
                      <Insets left="80.0" top="5.0" />
                   </HBox.margin>
+                  <font>
+                     <Font name="Segoe UI Black" size="14.0" />
+                  </font>
                </Label>
             </children>
             <opaqueInsets>
@@ -89,14 +92,14 @@
    </VBox>
    <VBox fillWidth="false" prefHeight="374.0" prefWidth="430.0">
       <children>
-         <TableView fx:id="table_data" editable="true" prefHeight="366.0" prefWidth="724.0">
+         <TableView fx:id="table_data" prefHeight="366.0" prefWidth="724.0" style="-fx-border-color: grey;">
            <columns>
              <TableColumn fx:id="table_code" editable="false" prefWidth="69.60000991821289" style="-fx-alignment: CENTER;" text="Kode" />
                <TableColumn fx:id="table_name" editable="false" prefWidth="240.8000030517578" style="-fx-alignment: CENTER;" text="Nama" />
                <TableColumn fx:id="table_single_price" editable="false" prefWidth="126.39996337890625" style="-fx-alignment: CENTER;" text="Harga Satuan" />
                <TableColumn fx:id="table_amount" onEditCommit="#setJumlah" prefWidth="89.60003662109375" style="-fx-alignment: CENTER;" text="Jumlah" />
-               <TableColumn fx:id="table_total" editable="false" prefWidth="127.20001220703125" style="-fx-alignment: CENTER;" text="Total" />
-               <TableColumn fx:id="table_action" editable="false" prefWidth="64.800048828125" style="-fx-alignment: CENTER;" text="Action" />
+               <TableColumn fx:id="table_total" editable="false" prefWidth="125.60003662109375" style="-fx-alignment: CENTER;" text="Total" />
+               <TableColumn fx:id="table_action" editable="false" prefWidth="66.4000244140625" sortable="false" style="-fx-alignment: CENTER;" text="Action" />
            </columns>
             <VBox.margin>
                <Insets top="-5.0" />

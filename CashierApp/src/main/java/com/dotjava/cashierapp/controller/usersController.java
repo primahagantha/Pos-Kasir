@@ -33,8 +33,14 @@ public class usersController {
             }
 
             if(password_service.validatePassword(candidatePassword, UserData.getPassword())){
+//                set User Session
                 userSession_service.setUserId(UserData.getIdUser());
                 userSession_service.setUserFullName(UserData.getName());
+                userSession_service.setUserName(UserData.getUsername());
+
+//                Set User Log Activity
+                user_db.setUserActivity("LI");
+
                 sceneController.switchToMainApp(actionEven);
                 System.out.println("Login Success");
             }else{

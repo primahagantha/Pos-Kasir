@@ -9,10 +9,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import java.io.IOException;
 
 public class mainController implements Initializable {
     @FXML

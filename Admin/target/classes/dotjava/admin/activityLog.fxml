@@ -16,15 +16,20 @@
         <HBox alignment="CENTER_LEFT">
             <Label text="Tanggal:" />
             <DatePicker fx:id="datePicker" />
-        </HBox>
+            <Button fx:id="clearButton" text="Clear" /> </HBox>
         <TableView fx:id="tableView" prefHeight="200.0" prefWidth="600.0">
             <columns>
+                <TableColumn fx:id="idActColumn" text="Id" prefWidth="50.0" />
                 <TableColumn fx:id="tanggalColumn" text="Tanggal" prefWidth="100.0" />
-                <TableColumn fx:id="userColumn" text="Pengguna" prefWidth="100.0" />
-                <TableColumn fx:id="waktuColumn" text="Waktu" prefWidth="100.0" />
-                <TableColumn fx:id="deskripsiColumn" text="Deskripsi" prefWidth="300.0" />
+                <TableColumn fx:id="userIdColumn" text="User_ID" prefWidth="50.0" />
+                <TableColumn fx:id="userColumn" text="Username" prefWidth="100.0" />
+                <TableColumn fx:id="typeColumn" text="Tipe Act" prefWidth="100.0" />
+                <TableColumn fx:id="timeColumn" text="Waktu" prefWidth="100.0" />
             </columns>
         </TableView>
+        <HBox alignment="CENTER_RIGHT">
+            <Label fx:id="switchToMenu" text="Kembali ke Menu" onMouseClicked="#handleBackToMenu" />
+        </HBox>
     </VBox>
 
 </AnchorPane>

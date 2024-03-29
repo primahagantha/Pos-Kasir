@@ -1,13 +1,19 @@
 package dotjava.admin;
 
-public class itemEntry {
+public class ItemEntry {
 
+    private int id;
     private String code;
     private String name;
     private int price;
 
     private int quantity;
 
+    public int getId() { return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
     public String getCode() {
         return code;
     }

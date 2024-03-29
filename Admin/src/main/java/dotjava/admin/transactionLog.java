@@ -1,39 +1,63 @@
 package dotjava.admin;
 
 public class transactionLog {
-    private String user;
+    private int idTransaction;
+    private int idAct;
+    private int idItemSold;
+    private double cash;
+    private double total;
 
-    private String time;
-
-    private int price;
-    private int total;
-
-    private int quantity;
-
-    public String getUser() {
-        return user;
+    // Getter for idTransaction
+    public int getIdTransaction() {
+        return idTransaction;
     }
 
-    public String getTime() {
-        return time;
+    // Setter for idTransaction
+    public void setIdTransaction(int idTransaction) {
+        this.idTransaction = idTransaction;
     }
 
-    public int getPrice() {
-        return price;
+    // Getter for idAct
+    public int getIdAct() {
+        return idAct;
     }
 
-    public int getTotal() {
+    // Setter for idAct
+    public void setIdAct(int idAct) {
+        this.idAct = idAct;
+    }
+
+    // Getter for idItemSold
+    public int getIdItemSold() {
+        return idItemSold;
+    }
+
+    // Setter for idItemSold
+    public void setIdItemSold(int idItemSold) {
+        this.idItemSold = idItemSold;
+    }
+
+    // Getter for cash
+    public double getCash() {
+        return cash;
+    }
+
+    // Setter for cash
+    public void setCash(double cash) {
+        this.cash = cash;
+    }
+
+    // Getter for total
+    public double getTotal() {
         return total;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public static void main(String[] args) {
-
+    // Setter for total
+    public void setTotal(double total) {
+        this.total = total;
     }
 }
+
 
 
 

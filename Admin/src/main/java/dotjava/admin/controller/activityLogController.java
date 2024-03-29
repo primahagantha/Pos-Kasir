@@ -80,9 +80,7 @@ public class activityLogController implements Initializable {
             populateTable(); //
         });
 
-        switchToMenu.setOnAction(event -> {
-            handleBackToMenu(event);
-        });
+        switchToMenu.setOnAction(this::handleBackToMenu);
         tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 populateTextFields(newSelection);
@@ -122,7 +120,6 @@ public class activityLogController implements Initializable {
         }
     }
 
-    // Optional method for navigation back to main menu (replace with your logic)
     @FXML
     private void handleBackToMenu(javafx.event.ActionEvent event) {
         // Load the FXML for the main menu scene

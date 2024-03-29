@@ -62,7 +62,9 @@ public class mainController implements Initializable {
             stage.show();
         } catch (IOException e) {
             // Handle the IOException here (e.g., display error message)
+            System.out.println("Disini Error");
             e.printStackTrace();  // For debugging purposes (remove in production)
+
             System.out.println("Error loading activityLog.fxml: "  + e.getMessage());
         }
     }

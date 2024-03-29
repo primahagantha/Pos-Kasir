@@ -2,6 +2,7 @@ package dotjava.admin.models;
 
 import dotjava.admin.activityLog;
 import dotjava.admin.config.db_config;
+import javafx.beans.property.SimpleStringProperty;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -9,102 +10,141 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class activityLog_db {
+    static ArrayList<activityLog> tempActLog;
 
-    public List<activityLog> getActivityLogs() throws SQLException {
-        activityLog_db db = new activityLog_db();
-        List<activityLog> logs = new ArrayList<>();
+    public static ArrayList<activityLog> fetchAllActivityLog() {
+        tempActLog = new ArrayList<>();
+        try (Statement statement = db_config.conn.createStatement()) { // Use try-with-resources for auto-closing
+            String query = "SELECT * FROM activity_log";
+            ResultSet result = statement.executeQuery(query);
 
-        // Check if connection is already established
-        if (db_config.conn == null) {
-            db_config.initDBConnection(); // Initialize connection if not established
+            while (result.next()) {
+                activityLog actLog = new activityLog();
+
+                int idAct = result.getInt("id_act");
+                int idUser = result.getInt("id_user");
+                String dateTimeString = result.getString("date");
+                String username = result.getString("username");
+                String typeAct = result.getString("tipe_act");
+
+                SimpleStringProperty dateProperty = new SimpleStringProperty();
+                SimpleStringProperty timeProperty = new SimpleStringProperty();
+                separateDateTime(dateTimeString, dateProperty, timeProperty);
+
+                String dateString = dateProperty.get();
+                String timeString = timeProperty.get();
+
+                actLog.setDate(dateString);
+
+                actLog.setIdAct(idAct);
+                actLog.setIdUser(idUser);
+                actLog.setTime(timeString);
+                actLog.setUsername(username);
+                actLog.setTypeAct(typeAct);
+                actLog.setDesc(convertTypeActToDesc(typeAct));
+                tempActLog.add(actLog);
+            }
+
+            return tempActLog;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
+    }
 
-        try (Connection conn = db_config.conn; // Use the established connection
-             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM activity_log")) {
+    public static void separateDateTime(String dateTimeString, SimpleStringProperty dateProperty, SimpleStringProperty timeProperty) {
+        // Pisahkan tanggal dan waktu
+        String[] parts = dateTimeString.split(" ");
+        String dateString = parts[0];
+        String timeString = parts[1];
 
-            ResultSet rs = stmt.executeQuery();
+        // Set properti tanggal dan waktu
+        dateProperty.set(dateString);
+        timeProperty.set(timeString);
+    }
+
+    public static void clearActivityLog() {
+        try (Statement statement = db_config.conn.createStatement()) {
+            String clearQuery = "DELETE FROM activity_log";
+            statement.executeUpdate(clearQuery);
+            System.out.println("Activity log table cleared successfully.");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void insertActivityLog(activityLog actLog) {
+        try (PreparedStatement insertStatement = db_config.conn.prepareStatement(
+                "INSERT INTO activity_log (id_user, username, typeAct, date) VALUES (?, ?, ?, ?)")) {
+
+            insertStatement.setInt(1, actLog.getIdUser());
+            insertStatement.setString(2, actLog.getUsername());
+            insertStatement.setString(3, actLog.getTypeAct());
+            // Assuming you have a way to format date for database insertion (e.g., convert to SQL Date)
+            insertStatement.setString(4, actLog.getDate());
+            insertStatement.executeUpdate();
+            System.out.println("Activity log inserted successfully.");
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static String convertTypeActToDesc(String typeAct) {
+        String description = "";
+        switch (typeAct) {
+            case "LI":
+                description = "Login / Logout";
+                break;
+            case "TR":
+                description = "Transaction Added";
+                break;
+            default:
+                description = typeAct; // Handle any unknown types
+        }
+        return description;
+    }
+
+    public List<activityLog> getFilteredActivityLogs(LocalDate selectedDate) throws SQLException {
+        List<activityLog> logs = new ArrayList<>();
+        try (PreparedStatement statement = db_config.conn.prepareStatement(
+                "SELECT * FROM activity_log WHERE DATE(date) = ?")) {
+            statement.setString(1, String.valueOf(selectedDate));
+
+            ResultSet rs = statement.executeQuery();
 
             while (rs.next()) {
-                activityLog log = new activityLog();
-                log.setIdAct(rs.getInt("id_act"));
-                log.setTypeAct(rs.getString("tipe_act"));
-                log.setIdUser(rs.getInt("id_user"));
-                log.setUsername(rs.getString("username"));
-
+                activityLog actLog = new activityLog();
 
                 int idAct = rs.getInt("id_act");
-                String typeAct = rs.getString("tipe_act");
-                int userId = rs.getInt("id_user");
+                int idUser = rs.getInt("id_user");
+                String dateTimeString = rs.getString("date");
                 String username = rs.getString("username");
-                String date = rs.getString("date");
+                String typeAct = rs.getString("tipe_act");
 
-                // Print retrieved data
-                System.out.printf("ID: %d, Type: %s, User ID: %d, Username: %s, Date: %s\n", idAct, typeAct, userId, username, date);
-                // Extract date and time from the "date" attribute
-                String[] dateAndTime = rs.getString("date").split(" ");
-                log.setDate(dateAndTime[0]); // Set the date part
+                SimpleStringProperty dateProperty = new SimpleStringProperty();
+                SimpleStringProperty timeProperty = new SimpleStringProperty();
+                separateDateTime(dateTimeString, dateProperty, timeProperty);
 
-                // Extract time components (hour, minute, second)
-                if (dateAndTime.length > 1) {
-                    String[] timeComponents = dateAndTime[1].split(":");
-                    log.setTime(timeComponents[0] + ":" + timeComponents[1] + ":" + timeComponents[2]);
-                } else {
-                    log.setTime(""); // Set empty time if unavailable
-                }
+                String dateString = dateProperty.get();
+                String timeString = timeProperty.get();
 
-                logs.add(log);
+                actLog.setDate(dateString);
+
+                actLog.setIdAct(idAct);
+                actLog.setIdUser(idUser);
+                actLog.setTime(timeString);
+                actLog.setUsername(username);
+                actLog.setTypeAct(typeAct);
+                actLog.setDesc(convertTypeActToDesc(typeAct));
+                logs.add(actLog);
             }
 
-        } catch (SQLException e) {
-            // Handle database errors appropriately
-            e.printStackTrace();
+            rs.close();
+            return logs;
         }
-
-        return logs;
     }
 
-    public List<activityLog> getActivityLogs(LocalDate date) throws SQLException {
-        List<activityLog> logs = new ArrayList<>();
-
-        // Check if connection is already established
-        if (db_config.conn == null) {
-            db_config.initDBConnection(); // Initialize connection if not established
-        }
-
-        try (Connection conn = db_config.conn; // Use the established connection
-             PreparedStatement stmt = conn.prepareStatement("SELECT id_act, tipe_act, id_user, username, date FROM activity_log WHERE date = ?")) {
-
-            stmt.setObject(1, date); // Set the date parameter
-
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                activityLog log = new activityLog();
-                log.setIdAct(rs.getInt("id_act"));
-                log.setTypeAct(rs.getString("tipe_act"));
-                log.setIdUser(rs.getInt("id_user"));
-                log.setUsername(rs.getString("username"));
-
-                // Extract date and time from the "date" attribute
-                String[] dateAndTime = rs.getString("date").split(" ");
-                log.setDate(dateAndTime[0]); // Set the date part
-
-                // Extract time components (hour, minute, second)
-                if (dateAndTime.length > 1) {
-                    String[] timeComponents = dateAndTime[1].split(":");
-                    log.setTime(timeComponents[0] + ":" + timeComponents[1] + ":" + timeComponents[2]);
-                } else {
-                    log.setTime(""); // Set empty time if unavailable
-                }
-
-                logs.add(log);
-            }
-
-        } catch (SQLException e) {
-            // Handle database errors appropriately
-            e.printStackTrace();
-        }
-
-        return logs;
     }
-}
+
+

@@ -50,15 +50,25 @@ public class activityLogController implements Initializable {
     private TableColumn<activityLog, String> timeColumn;
 
     @FXML
+    private TextField tfUser;
+
+    @FXML
+    private TextField tfTime;
+
+    @FXML
+    private TextField tfDesc;
+
+    @FXML
     private Button clearButton;
 
     @FXML
-    private Label switchToMenu;
+    private Button switchToMenu;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         populateTable();
-        // Added for clarity and separation of concerns
+
         datePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
             filterLogsByDate(newValue);
         });
@@ -69,35 +79,42 @@ public class activityLogController implements Initializable {
             tableView.getItems().clear();
             populateTable(); //
         });
+
+        switchToMenu.setOnAction(event -> {
+            handleBackToMenu(event);
+        });
+        tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                populateTextFields(newSelection);
+            } else {
+                clearTextFields(); // Clear text fields when no row is selected
+            }
+        });
     }
 
     @FXML
     private void populateTable() {
-        try {
-            System.out.println("Hello User, Activity Log Here");
-            activityLog_db db = new activityLog_db();
-            List<activityLog> logs = db.getActivityLogs();
+        System.out.println("Hello User, Activity Log Here");
+        activityLog_db db = new activityLog_db();
+        List<activityLog> logs = activityLog_db.fetchAllActivityLog();
 
-            idActColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getIdAct()).asObject());
-            userIdColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getIdUser()).asObject());
-            tanggalColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDate()));
-            userColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUsername()));
-            typeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTypeAct()));
-            timeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTime()));
-            // Populate table with data
-            tableView.getItems().addAll(logs);
+        idActColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getIdAct()).asObject());
+        userIdColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getIdUser()).asObject());
+        tanggalColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDate()));
+        userColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUsername()));
+        typeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTypeAct()));
+        timeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTime()));
+        // Populate table with data
+        tableView.getItems().addAll(logs);
 
-        } catch (SQLException e) {
-            // Handle database errors (e.g., display an error message)
-            e.printStackTrace();
-        }
     }
 
     @FXML
     private void filterLogsByDate(LocalDate selectedDate) {
         try {
             activityLog_db db = new activityLog_db();
-            List<activityLog> filteredLogs = db.getActivityLogs(selectedDate); // Pass the selectedDate argument
+            List<activityLog> filteredLogs = db.getFilteredActivityLogs(selectedDate);
+            System.out.println(selectedDate);
             tableView.getItems().clear();
             tableView.getItems().addAll(filteredLogs);
         } catch (SQLException e) {
@@ -124,5 +141,16 @@ public class activityLogController implements Initializable {
             System.out.println("Error loading itemEntry.fxml: " + e.getMessage());
         }
     }
+    private void populateTextFields(activityLog selectedLog) {
+        tfUser.setText(selectedLog.getUsername());
+        tfTime.setText(selectedLog.getTime());
+        tfDesc.setText(selectedLog.getDesc()); // Use the descriptive text
+    }
+    private void clearTextFields() {
+        tfUser.setText("");
+        tfTime.setText("");
+        tfDesc.setText("");
+    }
+
 
 }

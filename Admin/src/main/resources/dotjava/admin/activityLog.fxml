@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
@@ -16,7 +14,8 @@
         <HBox alignment="CENTER_LEFT">
             <Label text="Tanggal:" />
             <DatePicker fx:id="datePicker" />
-            <Button fx:id="clearButton" text="Clear" /> </HBox>
+            <Button fx:id="clearButton" text="Clear" />
+        </HBox>
         <TableView fx:id="tableView" prefHeight="200.0" prefWidth="600.0">
             <columns>
                 <TableColumn fx:id="idActColumn" text="Id" prefWidth="50.0" />
@@ -27,8 +26,20 @@
                 <TableColumn fx:id="timeColumn" text="Waktu" prefWidth="100.0" />
             </columns>
         </TableView>
+
+        <HBox spacing="10.0" alignment="TOP_LEFT">
+            <Label text="User:" />
+            <TextField fx:id="tfUser" editable="false" />
+            <Label text="Waktu:" />
+            <TextField fx:id="tfTime" editable="false" />
+        </HBox>
+        <HBox spacing="10.0">
+            <Label text="Deskripsi:" />
+            <TextField fx:id="tfDesc" editable="false" prefWidth="200.0" />
+        </HBox>
+
         <HBox alignment="CENTER_RIGHT">
-            <Label fx:id="switchToMenu" text="Kembali ke Menu" onMouseClicked="#handleBackToMenu" />
+            <Button fx:id="switchToMenu" text="Kembali ke Menu" onMouseClicked="#handleBackToMenu" />
         </HBox>
     </VBox>
 

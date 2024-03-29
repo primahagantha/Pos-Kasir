@@ -1,6 +1,5 @@
 package dotjava.admin;
 
-import com.sun.source.doctree.ReferenceTree;
 
 public class activityLog {
 
@@ -10,6 +9,8 @@ public class activityLog {
     private String time;
     private String username;
     private String typeAct;
+
+    private String desc;
 
     // Getters (already present)
     public int getIdAct() {
@@ -36,6 +37,8 @@ public class activityLog {
         return idUser;
     }
 
+    public String getDesc() { return desc;}
+
     // Setters (added)
     public void setIdAct(int idAct) {
         this.idAct = idAct;
@@ -60,4 +63,6 @@ public class activityLog {
     public void setTypeAct(String typeAct) {
         this.typeAct = typeAct;
     }
+
+    public void setDesc(String desc) { this.desc = desc; }
 }

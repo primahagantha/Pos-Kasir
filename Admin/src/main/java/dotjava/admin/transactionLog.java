@@ -4,8 +4,20 @@ public class transactionLog {
     private int idTransaction;
     private int idAct;
     private int idItemSold;
-    private double cash;
-    private double total;
+    private int cash;
+    private int total;
+
+    private int idUser;
+    private String time;
+
+    private String user;
+
+    private String date;
+
+    private String infoTransaction;
+
+    private  String item;
+
 
     // Getter for idTransaction
     public int getIdTransaction() {
@@ -43,7 +55,7 @@ public class transactionLog {
     }
 
     // Setter for cash
-    public void setCash(double cash) {
+    public void setCash(int cash) {
         this.cash = cash;
     }
 
@@ -53,8 +65,57 @@ public class transactionLog {
     }
 
     // Setter for total
-    public void setTotal(double total) {
+    public void setTotal(int total) {
         this.total = total;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
+
+    public String getInfoTransaction() {
+        return infoTransaction;
+    }
+
+    public void setInfoTransaction(String infoTransaction) {
+        this.infoTransaction = infoTransaction;
+    }
+
+    public String getItem() {
+        return item;
+    }
+
+    public void setItem(String item) {
+        this.item = item;
     }
 }
 

@@ -1,20 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.beans.property.SimpleStringProperty?>
-<?import javafx.collections.FXCollections?>
-<?import javafx.collections.ObservableList?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.cell.PropertyValueFactory?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            fx:controller="dotjava.admin.controller.transactionController">
     <children>
         <VBox prefHeight="400.0" prefWidth="600.0">
             <children>
@@ -22,51 +12,57 @@
                     <children>
                         <Label text="Tanggal:" />
                         <DatePicker fx:id="tanggalPicker" prefHeight="25.0" prefWidth="100.0" />
-                        <Label text="User:" />
-                        <TextField prefHeight="25.0" prefWidth="100.0" />
-                        <Label text="Waktu:" />
-                        <TextField prefHeight="25.0" prefWidth="100.0" />
                     </children>
                 </HBox>
                 <TableView fx:id="transaksiTable" prefHeight="200.0" prefWidth="600.0">
                     <columns>
-                        <TableColumn fx:id="idTransaksiColumn" prefWidth="75.0" text="ID Transaksi">
-                            <cellValueFactory>
-                                <PropertyValueFactory property="idTransaksi" />
-                            </cellValueFactory>
+                        <TableColumn fx:id="tanggalTransaksiColumn" prefWidth="80.0" text="Tanggal">
                         </TableColumn>
-                        <TableColumn fx:id="idActColumn" prefWidth="75.0" text="ID Aktivitas">
-                            <cellValueFactory>
-                                <PropertyValueFactory property="idAct" />
-                            </cellValueFactory>
+                        <TableColumn fx:id="idTransaksiColumn" prefWidth="80.0" text="ID Transaksi">
+
                         </TableColumn>
-                        <TableColumn fx:id="idItemTerjualColumn" prefWidth="100.0" text="ID Item Terjual">
-                            <cellValueFactory>
-                                <PropertyValueFactory property="idItemTerjual" />
-                            </cellValueFactory>
+                        <TableColumn fx:id="idActColumn" prefWidth="80.0" text="ID Aktivitas">
+
                         </TableColumn>
-                        <TableColumn fx:id="cashColumn" prefWidth="75.0" text="Cash">
-                            <cellValueFactory>
-                                <PropertyValueFactory property="cash" />
-                            </cellValueFactory>
-                        </TableColumn>
-                        <TableColumn fx:id="totalColumn" prefWidth="75.0" text="Total">
-                            <cellValueFactory>
-                                <PropertyValueFactory property="total" />
-                            </cellValueFactory>
+                        <TableColumn fx:id="isiTransaksi" prefWidth="500.0" text="Transaksi">
+
                         </TableColumn>
                     </columns>
                 </TableView>
                 <HBox prefHeight="40.0" prefWidth="600.0">
                     <children>
-                        <Label text="Total:" />
-                        <TextField prefHeight="25.0" prefWidth="100.0" />
-                        <Button text="Simpan" />
-                        <Button text="Batal" />
+                        <Label text="User:" />
+                        <TextField prefHeight="25.0" prefWidth="100.0"  fx:id="userInfo"/>
+                        <Label text="Waktu:" />
+                        <TextField prefHeight="25.0" prefWidth="100.0" fx:id="timeInfo"/>
+                        <Button fx:id = "refreshButton" text="Refresh" />
                     </children>
                 </HBox>
+            <TableView fx:id="informasiTable" layoutX="10.0" layoutY="50.0" prefHeight="200.0" prefWidth="600.0">
+               <columns>
+                  <TableColumn fx:id="idTransaksiColumnInfo" prefWidth="109.0" text="ID Transaksi">
+
+                  </TableColumn>
+
+                  <TableColumn fx:id="idItemTerjualColumnInfo" prefWidth="100.0" text="ID Item Terjual">
+
+                  </TableColumn>
+                   <TableColumn fx:id="itemInfo" prefWidth="75.0" text="item">
+
+                   </TableColumn>
+                  <TableColumn fx:id="cashColumnInfo" prefWidth="75.0" text="Cash">
+
+                  </TableColumn>
+               </columns>
+            </TableView>
+                <HBox prefHeight="40.0" prefWidth="600.0">
+                <children>
+                    <Label text="Total:" />
+                    <TextField prefHeight="25.0" prefWidth="100.0" fx:id="totalField" />
+                </children>
+            </HBox>
             </children>
         </VBox>
+
     </children>
 </AnchorPane>
-

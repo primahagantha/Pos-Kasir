@@ -2,7 +2,6 @@ package dotjava.admin.controller;
 
 import dotjava.admin.activityLog;
 import dotjava.admin.models.activityLog_db; // Use the correct class name
-import javafx.application.Platform; // Import for potential navigation (optional)
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
@@ -141,7 +140,7 @@ public class activityLogController implements Initializable {
     private void populateTextFields(activityLog selectedLog) {
         tfUser.setText(selectedLog.getUsername());
         tfTime.setText(selectedLog.getTime());
-        tfDesc.setText(selectedLog.getDesc()); // Use the descriptive text
+        tfDesc.setText(selectedLog.getDesc()); //
     }
     private void clearTextFields() {
         tfUser.setText("");

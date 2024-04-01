@@ -25,6 +25,7 @@
         <HBox alignment="CENTER_RIGHT">
             <Button fx:id="tambahButton" text="Tambah Produk" />
             <Button fx:id="simpanButton" text="Simpan" />
+            <Button fx:id="deleteButton" text="Hapus Produk" />
         </HBox>
         <TableView fx:id="itemTableView" prefHeight="200.0" prefWidth="600.0">
             <columns>

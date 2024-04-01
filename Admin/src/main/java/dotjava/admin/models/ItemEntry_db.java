@@ -34,18 +34,19 @@ public class ItemEntry_db {
             updateStatement.setInt(3, id);
 
             int affectedRows = updateStatement.executeUpdate();
-
-            if (affectedRows > 0) {
-                // Assuming ItemEntry has a static method to get item by ID
-                ItemEntry updatedItem = getItemById(id);
-                if (updatedItem != null) {
-                    updatedItem.setName(name);
-                    updatedItem.setPrice(price);
-                }
-                System.out.println("Item updated successfully.");
-            } else {
-                System.out.println("No rows affected. Item update might have failed.");
+            ItemEntry updatedItem = getItemById(id);
+            if (updatedItem != null) {
+                updatedItem.setName(name);
+                updatedItem.setPrice(price);
             }
+            System.out.println("Item updated on database");
+//            if (affectedRows > 0) {
+//                // Assuming ItemEntry has a static method to get item by ID
+//
+//                System.out.println("Item updated successfully.");
+//            } else {
+//                System.out.println("No rows affected. Item update might have failed.");
+//            }
         }
     }
 

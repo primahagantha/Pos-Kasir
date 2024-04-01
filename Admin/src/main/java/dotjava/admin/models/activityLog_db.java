@@ -14,7 +14,7 @@ public class activityLog_db {
 
     public static ArrayList<activityLog> fetchAllActivityLog() {
         tempActLog = new ArrayList<>();
-        try (Statement statement = db_config.conn.createStatement()) { // Use try-with-resources for auto-closing
+        try (Statement statement = db_config.conn.createStatement()) {
             String query = "SELECT * FROM activity_log";
             ResultSet result = statement.executeQuery(query);
 
@@ -80,7 +80,6 @@ public class activityLog_db {
             insertStatement.setInt(1, actLog.getIdUser());
             insertStatement.setString(2, actLog.getUsername());
             insertStatement.setString(3, actLog.getTypeAct());
-            // Assuming you have a way to format date for database insertion (e.g., convert to SQL Date)
             insertStatement.setString(4, actLog.getDate());
             insertStatement.executeUpdate();
             System.out.println("Activity log inserted successfully.");
@@ -100,7 +99,7 @@ public class activityLog_db {
                 description = "Transaction Added";
                 break;
             default:
-                description = typeAct; // Handle any unknown types
+                description = typeAct;
         }
         return description;
     }

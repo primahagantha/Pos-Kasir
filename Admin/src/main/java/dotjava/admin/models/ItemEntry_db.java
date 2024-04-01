@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import dotjava.admin.config.db_config; // Assuming this class handles database connection
+import dotjava.admin.config.db_config;
 
 public class ItemEntry_db {
 
@@ -33,7 +33,7 @@ public class ItemEntry_db {
             updateStatement.setInt(2, price);
             updateStatement.setInt(3, id);
 
-            int affectedRows = updateStatement.executeUpdate();
+//            int affectedRows = updateStatement.executeUpdate();
             ItemEntry updatedItem = getItemById(id);
             if (updatedItem != null) {
                 updatedItem.setName(name);
@@ -41,8 +41,6 @@ public class ItemEntry_db {
             }
             System.out.println("Item updated on database");
 //            if (affectedRows > 0) {
-//                // Assuming ItemEntry has a static method to get item by ID
-//
 //                System.out.println("Item updated successfully.");
 //            } else {
 //                System.out.println("No rows affected. Item update might have failed.");
@@ -77,7 +75,7 @@ public class ItemEntry_db {
                 String name = rs.getString("name");
                 int price = rs.getInt("price");
 
-                // Create ItemEntry objects without a constructor (assuming setter methods exist)
+                // Create ItemEntry objects without a constructor
                 ItemEntry item = new ItemEntry();
                 item.setId(id);
                 item.setName(name);
@@ -118,32 +116,32 @@ public class ItemEntry_db {
             }
         }
     }
-    public static Integer setUserActivity(String actType) throws SQLException {
-        try{
-            String query = "INSERT INTO `activity_log` ( `tipe_act`, `id_user`, `username`, `date`) VALUES (?, ?, ?, CURRENT_TIMESTAMP())";
-
-            PreparedStatement statement = db_config.conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-
-            statement.setString(1, actType);
-            statement.setInt(2, 555); // Assuming user ID is 555
-            statement.setString(3, "admin");
-
-            int affectedRows = statement.executeUpdate();
-            int insertedIdActivity = 0;
-
-            if(affectedRows > 0){
-                try (ResultSet rs = statement.getGeneratedKeys()) {
-                    if (rs.next()) {
-                        System.out.println("Inserted activity log ID: " + rs.getInt(1));
-                        insertedIdActivity =  rs.getInt(1);
-                    }
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-            }
-            return insertedIdActivity;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
+//    public static Integer setUserActivity(String actType) throws SQLException {
+//        try{
+//            String query = "INSERT INTO `activity_log` ( `tipe_act`, `id_user`, `username`, `date`) VALUES (?, ?, ?, CURRENT_TIMESTAMP())";
+//
+//            PreparedStatement statement = db_config.conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+//
+//            statement.setString(1, actType);
+//            statement.setInt(2, 555); // Assuming user ID is 555
+//            statement.setString(3, "admin");
+//
+//            int affectedRows = statement.executeUpdate();
+//            int insertedIdActivity = 0;
+//
+//            if(affectedRows > 0){
+//                try (ResultSet rs = statement.getGeneratedKeys()) {
+//                    if (rs.next()) {
+//                        System.out.println("Inserted activity log ID: " + rs.getInt(1));
+//                        insertedIdActivity =  rs.getInt(1);
+//                    }
+//                } catch (SQLException ex) {
+//                    ex.printStackTrace();
+//                }
+//            }
+//            return insertedIdActivity;
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 }

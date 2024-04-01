@@ -23,8 +23,8 @@
                         </TableColumn>
                         <TableColumn fx:id="idActColumn" prefWidth="80.0" text="ID Aktivitas">
 
-                        </TableColumn>
-                        <TableColumn fx:id="isiTransaksi" prefWidth="500.0" text="Transaksi">
+<!--                        </TableColumn>-->
+<!--                        <TableColumn fx:id="isiTransaksi" prefWidth="500.0" text="Transaksi">-->
 
                         </TableColumn>
                     </columns>

@@ -12,7 +12,7 @@ public class activityLog {
 
     private String desc;
 
-    // Getters (already present)
+    // Getters
     public int getIdAct() {
         return idAct;
     }
@@ -39,7 +39,7 @@ public class activityLog {
 
     public String getDesc() { return desc;}
 
-    // Setters (added)
+    // Setters
     public void setIdAct(int idAct) {
         this.idAct = idAct;
     }

@@ -3,7 +3,6 @@ package dotjava.admin.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.Node;
@@ -45,8 +44,8 @@ public class mainController implements Initializable {
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
-            // Handle the IOException here (e.g., display error message)
-            e.printStackTrace();  // For debugging purposes (remove in production)
+            // Handle the IOException
+            e.printStackTrace();  // For debugging purposes
             System.out.println("Error loading itemEntry.fxml: " + e.getMessage());
         }
     }
@@ -61,9 +60,9 @@ public class mainController implements Initializable {
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
-            // Handle the IOException here (e.g., display error message)
+            // Handle the IOException
             System.out.println("Disini Error");
-            e.printStackTrace();  // For debugging purposes (remove in production)
+            e.printStackTrace();
 
             System.out.println("Error loading activityLog.fxml: "  + e.getMessage());
         }
@@ -79,8 +78,7 @@ public class mainController implements Initializable {
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
-            // Handle the IOException here (e.g., display error message)
-            e.printStackTrace();  // For debugging purposes (remove in production)
+            e.printStackTrace();
             System.out.println("Error loading transactionLog.fxml: "  + e.getMessage());
         }
     }

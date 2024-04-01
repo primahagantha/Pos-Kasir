@@ -47,9 +47,6 @@ public class transactionController implements Initializable {
     private TableColumn<transactionLog, String> dateColumn;
 
     @FXML
-    private TableColumn<transactionLog, String> isiTransaksi;
-
-    @FXML
     private TextField totalField;
 
     @FXML
@@ -113,33 +110,14 @@ public class transactionController implements Initializable {
         transactions.addAll(allLogs);
         updateTotalField();
 
-        // Set PropertyValueFactory for TableColumn
         idTransaksiColumn.setCellValueFactory(new PropertyValueFactory<>("idTransaction"));
         idActColumn.setCellValueFactory(new PropertyValueFactory<>("idAct"));
-        isiTransaksi.setCellValueFactory(new PropertyValueFactory<>("infoTransaction"));
         tanggalTransaksiColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
     }
 
     private void updateTotalField() {
         double total = transactions.stream().mapToDouble(transactionLog::getTotal).sum();
         totalField.setText(String.valueOf(total));
-    }
-
-    @FXML
-    public void handleRefresh() {
-        if (tanggalPicker.getValue() == null) {
-            populateTable();
-        } else {
-            LocalDate selectedDate = tanggalPicker.getValue();
-            try {
-                List<transactionLog> filteredLogs = transactionLog_db.getFilteredTransactionLogLogs(selectedDate);
-                transactions.clear();
-                transactions.addAll(filteredLogs);
-                populateTable();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     @FXML
@@ -161,8 +139,6 @@ public class transactionController implements Initializable {
     }
 
     private void populateSelectTable(transactionLog newSelection) {
-
-
         totalField.setText(String.valueOf(newSelection.getTotal()));
         timeInfo.setText(newSelection.getTime());
         userInfo.setText(newSelection.getUser());
@@ -186,10 +162,8 @@ public class transactionController implements Initializable {
         ObservableList<transactionLog> selectedTransaction = FXCollections.observableArrayList();
         selectedTransaction.add(newSelection);
 
-        // Set sumber data untuk informasiTable dengan detail transaksi yang dipilih
         informasiTable.setItems(selectedTransaction);
 
-        // Print statement untuk memeriksa nilai properti yang diakses
         System.out.println("Data yang dipilih dari transaksi:");
         System.out.println(newSelection.getIdTransaction() + " - " + newSelection.getIdItemSold() + " - " + newSelection.getItem() + " - " + newSelection.getCash());
     }

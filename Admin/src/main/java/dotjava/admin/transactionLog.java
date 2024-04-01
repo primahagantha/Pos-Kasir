@@ -19,7 +19,6 @@ public class transactionLog {
     private  String item;
 
 
-    // Getter for idTransaction
     public int getIdTransaction() {
         return idTransaction;
     }
@@ -29,12 +28,9 @@ public class transactionLog {
         this.idTransaction = idTransaction;
     }
 
-    // Getter for idAct
-    public int getIdAct() {
-        return idAct;
-    }
 
-    // Setter for idAct
+
+
     public void setIdAct(int idAct) {
         this.idAct = idAct;
     }
@@ -116,6 +112,10 @@ public class transactionLog {
 
     public void setItem(String item) {
         this.item = item;
+    }
+
+    public int getIdAct() {
+        return idAct;
     }
 }
 

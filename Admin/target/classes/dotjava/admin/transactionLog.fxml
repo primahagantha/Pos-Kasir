@@ -1,20 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.2-ea"
-            fx:controller="dotjava.admin.controller.transactionController">
+<AnchorPane id="AnchorPane" prefHeight="406.0" prefWidth="600.0" style="-fx-background-color: #323437;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dotjava.admin.controller.transactionController">
     <children>
-        <VBox prefHeight="400.0" prefWidth="600.0">
+        <VBox prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #323437;">
             <children>
                 <HBox prefHeight="40.0" prefWidth="600.0">
                     <children>
-                        <Label text="Tanggal:" />
-                        <DatePicker fx:id="tanggalPicker" prefHeight="25.0" prefWidth="100.0" />
+                        <Label text="Tanggal :" textFill="#e2b714">
+                            <HBox.margin>
+                                <Insets right="5.0" top="8.0" />
+                            </HBox.margin>
+                            <font>
+                                <Font name="Lucida Sans Typewriter Bold" size="12.0" />
+                            </font></Label>
+                        <DatePicker fx:id="tanggalPicker" prefHeight="25.0" prefWidth="139.0" promptText="Masukkan tanggal" style="-fx-background-color: #646669;">
+                            <HBox.margin>
+                                <Insets top="3.0" />
+                            </HBox.margin></DatePicker>
                     </children>
+                    <VBox.margin>
+                        <Insets left="15.0" top="10.0" />
+                    </VBox.margin>
                 </HBox>
-                <TableView fx:id="transaksiTable" prefHeight="200.0" prefWidth="600.0">
+                <TableView fx:id="transaksiTable" prefHeight="162.0" prefWidth="600.0" style="-fx-background-color: #323437;">
                     <columns>
                         <TableColumn fx:id="tanggalTransaksiColumn" prefWidth="80.0" text="Tanggal">
                         </TableColumn>
@@ -23,44 +43,98 @@
                         </TableColumn>
                         <TableColumn fx:id="idActColumn" prefWidth="80.0" text="ID Aktivitas">
 
-                        </TableColumn>
-                        <TableColumn fx:id="isiTransaksi" prefWidth="500.0" text="Transaksi">
+                            <!--                        </TableColumn>-->
+                            <!--                        <TableColumn fx:id="isiTransaksi" prefWidth="500.0" text="Transaksi">-->
 
                         </TableColumn>
                     </columns>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                    <VBox.margin>
+                        <Insets top="7.0" />
+                    </VBox.margin>
                 </TableView>
                 <HBox prefHeight="40.0" prefWidth="600.0">
                     <children>
-                        <Label text="User:" />
-                        <TextField prefHeight="25.0" prefWidth="100.0"  fx:id="userInfo"/>
-                        <Label text="Waktu:" />
-                        <TextField prefHeight="25.0" prefWidth="100.0" fx:id="timeInfo"/>
-                        <Button fx:id = "refreshButton" text="Refresh" />
+                        <Label text="User :" textFill="#e2b714">
+                            <font>
+                                <Font name="Lucida Sans Typewriter Bold" size="12.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets top="8.0" />
+                            </HBox.margin>
+                        </Label>
+                        <TextField fx:id="userInfo" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #646669;">
+                            <HBox.margin>
+                                <Insets left="5.0" top="3.0" />
+                            </HBox.margin></TextField>
+                        <Label text="Waktu :" textFill="#e2b714">
+                            <font>
+                                <Font name="Lucida Sans Typewriter Bold" size="12.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="10.0" top="8.0" />
+                            </HBox.margin>
+                        </Label>
+                        <TextField fx:id="timeInfo" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #646669;">
+                            <HBox.margin>
+                                <Insets left="5.0" top="3.0" />
+                            </HBox.margin></TextField>
+                        <Button fx:id="refreshButton" style="-fx-background-color: #646669;" text="Refresh" textFill="#e2b714">
+                            <HBox.margin>
+                                <Insets left="20.0" top="2.0" />
+                            </HBox.margin>
+                            <font>
+                                <Font name="Lucida Sans Typewriter Bold" size="12.0" />
+                            </font>
+                            <padding>
+                                <Insets bottom="5.0" left="9.0" right="9.0" top="6.0" />
+                            </padding></Button>
                     </children>
+                    <VBox.margin>
+                        <Insets left="10.0" top="35.0" />
+                    </VBox.margin>
                 </HBox>
-            <TableView fx:id="informasiTable" layoutX="10.0" layoutY="50.0" prefHeight="200.0" prefWidth="600.0">
-               <columns>
-                  <TableColumn fx:id="idTransaksiColumnInfo" prefWidth="109.0" text="ID Transaksi">
+                <TableView fx:id="informasiTable" layoutX="10.0" layoutY="50.0" prefHeight="200.0" prefWidth="600.0" style="-fx-background-color: #323437;">
+                    <columns>
+                        <TableColumn fx:id="idTransaksiColumnInfo" prefWidth="109.0" text="ID Transaksi">
 
-                  </TableColumn>
+                        </TableColumn>
 
-                  <TableColumn fx:id="idItemTerjualColumnInfo" prefWidth="100.0" text="ID Item Terjual">
+                        <TableColumn fx:id="idItemTerjualColumnInfo" prefWidth="100.0" text="ID Item Terjual">
 
-                  </TableColumn>
-                   <TableColumn fx:id="itemInfo" prefWidth="75.0" text="item">
+                        </TableColumn>
+                        <TableColumn fx:id="itemInfo" prefWidth="75.0" text="item">
 
-                   </TableColumn>
-                  <TableColumn fx:id="cashColumnInfo" prefWidth="75.0" text="Cash">
+                        </TableColumn>
+                        <TableColumn fx:id="cashColumnInfo" prefWidth="75.0" text="Cash">
 
-                  </TableColumn>
-               </columns>
-            </TableView>
+                        </TableColumn>
+                    </columns>
+                    <VBox.margin>
+                        <Insets top="7.0" />
+                    </VBox.margin>
+                </TableView>
                 <HBox prefHeight="40.0" prefWidth="600.0">
-                <children>
-                    <Label text="Total:" />
-                    <TextField prefHeight="25.0" prefWidth="100.0" fx:id="totalField" />
-                </children>
-            </HBox>
+                    <children>
+                        <Label text="Total :" textFill="#e2b714">
+                            <font>
+                                <Font name="Lucida Sans Typewriter Bold" size="12.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets top="8.0" />
+                            </HBox.margin>
+                        </Label>
+                        <TextField fx:id="totalField" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #646669;">
+                            <HBox.margin>
+                                <Insets left="5.0" top="3.0" />
+                            </HBox.margin></TextField>
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="10.0" left="15.0" top="9.0" />
+                    </VBox.margin>
+                </HBox>
             </children>
         </VBox>
 

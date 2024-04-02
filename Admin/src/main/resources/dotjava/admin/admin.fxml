@@ -1,83 +1,62 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<?import javafx.scene.image.ImageView?>
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dotjava.admin.controller.mainController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #323437;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dotjava.admin.controller.mainController">
    <padding>
       <Insets bottom="5.0" left="5.0" top="5.0" />
    </padding>
    <children>
-      <TabPane fx:id="mainTabbedPane" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
-         <Tab text="Home">
-            <graphic>
-               <ImageView fx:id="homeIcon" fitHeight="20.0" fitWidth="20.0" pickOnBounds="false" preserveRatio="true" />
-            </graphic>
-            <content>
-               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
-               </AnchorPane>
-            </content>
-         </Tab>
-         <Tab text="Item Entry">
-            <content>
-               <AnchorPane fx:id="itemEntryAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
-               </AnchorPane>
-            </content>
-         </Tab>
-         <Tab text="Activity Log">
-            <content>
-               <AnchorPane fx:id="activityLogAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
-               </AnchorPane>
-            </content>
-         </Tab>
-         <Tab text="Transaction Log">
-            <content>
-               <AnchorPane fx:id="transactionLogAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
-               </AnchorPane>
-            </content>
-         </Tab>
-      </TabPane>
-   </children>
-</VBox>
-=======
-<?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dotjava.admin.controller.mainController">
-   <padding>
-      <Insets bottom="5.0" left="5.0" top="5.0" />
-   </padding>
-   <children>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Admin Page">
+      <Text fill="#e2b714" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin Page">
          <font>
-            <Font name="Nirmala UI" size="33.0" />
+            <Font name="Lucida Sans Typewriter Bold" size="48.0" />
          </font>
+         <VBox.margin>
+            <Insets top="80.0" />
+         </VBox.margin>
       </Text>
       <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
             <BorderPane prefHeight="200.0" prefWidth="200.0">
-               <top>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Select Menu" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font name="Yu Gothic UI Regular" size="31.0" />
-                     </font>
-                  </Text>
-               </top>
                <center>
                   <VBox alignment="CENTER" spacing="10">
-                     <Button fx:id="itemEntryButton" mnemonicParsing="false" text="Item Entry" />
-                     <Button fx:id="activityLogButton" alignment="CENTER" mnemonicParsing="false" text="Activity Log" textOverrun="CENTER_ELLIPSIS" />
-                     <Button fx:id="transactionLogButton" mnemonicParsing="false" text="Transaction Log" />
+                     <Text fill="#e2b714" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Menu :">
+                        <font>
+                           <Font name="Lucida Sans Typewriter Bold" size="18.0" />
+                        </font>
+                        <VBox.margin>
+                           <Insets bottom="5.0" left="10.0" />
+                        </VBox.margin>
+                     </Text>
+                     <Button fx:id="itemEntryButton" mnemonicParsing="false" style="-fx-background-color: #646669;" text="Item Entry" textFill="#e2b714">
+                        <font>
+                           <Font name="Lucida Sans Typewriter Bold" size="12.0" />
+                        </font>
+                        <padding>
+                           <Insets bottom="5.0" left="9.0" right="9.0" top="6.0" />
+                        </padding></Button>
+                     <Button fx:id="activityLogButton" alignment="CENTER" mnemonicParsing="false" style="-fx-background-color: #646669;" text="Activity Log" textFill="#e2b714" textOverrun="CENTER_ELLIPSIS">
+                        <font>
+                           <Font name="Lucida Sans Typewriter Bold" size="12.0" />
+                        </font>
+                        <padding>
+                           <Insets bottom="5.0" left="9.0" right="9.0" top="6.0" />
+                        </padding></Button>
+                     <Button fx:id="transactionLogButton" mnemonicParsing="false" style="-fx-background-color: #646669;" text="Transaction Log" textFill="#e2b714">
+                        <font>
+                           <Font name="Lucida Sans Typewriter Bold" size="12.0" />
+                        </font>
+                        <padding>
+                           <Insets bottom="5.0" left="9.0" right="9.0" top="6.0" />
+                        </padding></Button>
+                     <BorderPane.margin>
+                        <Insets top="10.0" />
+                     </BorderPane.margin>
                   </VBox>
                </center>
             </BorderPane>
@@ -85,4 +64,3 @@
       </VBox>
    </children>
 </VBox>
->>>>>>> 10e1d0949f48f75a1d3747eb906f05e58634a50d

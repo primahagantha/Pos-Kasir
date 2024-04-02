@@ -50,6 +50,9 @@ public class itemEntryController implements Initializable {
     private Button deleteButton;
 
     @FXML
+    private Label labelInfo;
+
+    @FXML
     private ObservableList<ItemEntry> items;
 
     @FXML
@@ -117,9 +120,12 @@ public class itemEntryController implements Initializable {
             namaTextField.clear();
             hargaTextField.clear();
             System.out.println("Item added successfully.");
+            labelInfo.setText(" ✅ Item added successfully.");
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error adding item: " + e.getMessage());
+            labelInfo.setText(" Item adding failed.");
+
         }
     }
     @FXML
@@ -145,12 +151,16 @@ public class itemEntryController implements Initializable {
                 int itemIndex = items.indexOf(selectedItem);
                 items.set(itemIndex, selectedItem);
 
-                System.out.println("Item updated successfully.");
+                System.out.println(" Item updated successfully.");
+                labelInfo.setText("  ✅ Item updated successfully.");
 
 
             } catch (SQLException e) {
                 e.printStackTrace();
                 System.out.println("Error updating item: " + e.getMessage());
+                labelInfo.setText("Item updated Failed.");
+
+
             }
         } else {
             System.out.println("Please select an item to update.");
@@ -166,9 +176,13 @@ public class itemEntryController implements Initializable {
             ItemEntry_db.deleteItem(selectedItem.getId());
             items.remove(selectedItem);
             clearTextFields();
+            labelInfo.setText(" ✅ Item Delete successfully.");
+
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Error updating item: " + e.getMessage());
+            labelInfo.setText("Item delete failed.");
+
         }
 
     }

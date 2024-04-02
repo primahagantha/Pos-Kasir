@@ -123,7 +123,7 @@ public class transactionLog_db {
 
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("error detected: " + e);
         }
 
         return logs;

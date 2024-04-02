@@ -33,18 +33,17 @@ public class ItemEntry_db {
             updateStatement.setInt(2, price);
             updateStatement.setInt(3, id);
 
-//            int affectedRows = updateStatement.executeUpdate();
+            int affectedRows = updateStatement.executeUpdate();
             ItemEntry updatedItem = getItemById(id);
             if (updatedItem != null) {
                 updatedItem.setName(name);
                 updatedItem.setPrice(price);
             }
-            System.out.println("Item updated on database");
-//            if (affectedRows > 0) {
-//                System.out.println("Item updated successfully.");
-//            } else {
-//                System.out.println("No rows affected. Item update might have failed.");
-//            }
+            if (affectedRows > 0) {
+                System.out.println("Item updated successfully.");
+            } else {
+                System.out.println("No rows affected. Item update might have failed.");
+            }
         }
     }
 

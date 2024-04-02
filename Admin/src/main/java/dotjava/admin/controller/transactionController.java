@@ -94,7 +94,11 @@ public class transactionController implements Initializable {
 
         transaksiTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                populateSelectTable(newSelection);
+                try {
+                    populateSelectTable(newSelection);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
                 System.out.println(newSelection);
             } else {
                 clearTextFields();
@@ -138,7 +142,7 @@ public class transactionController implements Initializable {
         userInfo.setText("");
     }
 
-    private void populateSelectTable(transactionLog newSelection) {
+    private void populateSelectTable(transactionLog newSelection) throws SQLException {
         totalField.setText(String.valueOf(newSelection.getTotal()));
         timeInfo.setText(newSelection.getTime());
         userInfo.setText(newSelection.getUser());
@@ -166,6 +170,7 @@ public class transactionController implements Initializable {
 
         System.out.println("Data yang dipilih dari transaksi:");
         System.out.println(newSelection.getIdTransaction() + " - " + newSelection.getIdItemSold() + " - " + newSelection.getItem() + " - " + newSelection.getCash());
+
     }
 
 

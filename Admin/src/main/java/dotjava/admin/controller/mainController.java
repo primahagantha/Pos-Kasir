@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -14,8 +13,6 @@ import java.util.ResourceBundle;
 import java.io.IOException;
 
 public class mainController implements Initializable {
-    @FXML
-    private AnchorPane mainContainer;
 
     @FXML
     private Button itemEntryButton;
@@ -37,7 +34,7 @@ public class mainController implements Initializable {
     public void switchToItemEntry(javafx.event.ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(mainController.class.getResource("/dotjava/admin/itemEntry.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 400, 600);
+            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
             System.out.println("Admin clicked Item Entry button");
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setTitle("Admin: Item Entry");
@@ -53,7 +50,7 @@ public class mainController implements Initializable {
     public void switchToActivityLog(javafx.event.ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(mainController.class.getResource("/dotjava/admin/activityLog.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 400, 600);
+            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
             System.out.println("Admin clicked Activity Log button");
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setTitle("Admin: Activity Log");
@@ -71,7 +68,7 @@ public class mainController implements Initializable {
     public void switchToTransactionLog(javafx.event.ActionEvent event) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(mainController.class.getResource("/dotjava/admin/transactionLog.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 400, 600);
+            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
             System.out.println("Admin clicked Transaction Log button");
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setTitle("Admin: Transaction Log");

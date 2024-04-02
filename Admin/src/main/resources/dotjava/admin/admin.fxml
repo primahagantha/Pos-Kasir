@@ -1,3 +1,50 @@
+<<<<<<< HEAD
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import javafx.scene.image.ImageView?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dotjava.admin.controller.mainController">
+   <padding>
+      <Insets bottom="5.0" left="5.0" top="5.0" />
+   </padding>
+   <children>
+      <TabPane fx:id="mainTabbedPane" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+         <Tab text="Home">
+            <graphic>
+               <ImageView fx:id="homeIcon" fitHeight="20.0" fitWidth="20.0" pickOnBounds="false" preserveRatio="true" />
+            </graphic>
+            <content>
+               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+               </AnchorPane>
+            </content>
+         </Tab>
+         <Tab text="Item Entry">
+            <content>
+               <AnchorPane fx:id="itemEntryAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+               </AnchorPane>
+            </content>
+         </Tab>
+         <Tab text="Activity Log">
+            <content>
+               <AnchorPane fx:id="activityLogAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+               </AnchorPane>
+            </content>
+         </Tab>
+         <Tab text="Transaction Log">
+            <content>
+               <AnchorPane fx:id="transactionLogAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+               </AnchorPane>
+            </content>
+         </Tab>
+      </TabPane>
+   </children>
+</VBox>
+=======
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.*?>
@@ -38,3 +85,4 @@
       </VBox>
    </children>
 </VBox>
+>>>>>>> 10e1d0949f48f75a1d3747eb906f05e58634a50d

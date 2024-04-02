@@ -76,14 +76,19 @@ public class transactionController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //menampilkan data di didatabase menggunakan setter
         transactions = FXCollections.observableArrayList();
         transaksiTable.setItems(transactions);
-
+        //print all data yang sudah di setters ke baris dan kolom
         populateTable();
+
+        //datepicker for select date
 
         tanggalPicker.valueProperty().addListener((observable, oldValue, newValue) -> {
             handleDatePicker(newValue);
         });
+
+        // Clear/Refresh button
 
         refreshButton.setOnAction(event -> {
             tanggalPicker.setValue(null);
@@ -91,7 +96,7 @@ public class transactionController implements Initializable {
             informasiTable.getItems().clear();
             populateTable(); //
         });
-
+        //fungsi untuk memilih baris yang ingin di tampilkan date lebih detail
         transaksiTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 try {

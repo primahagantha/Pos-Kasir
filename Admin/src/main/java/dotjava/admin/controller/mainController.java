@@ -25,6 +25,7 @@ public class mainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //button untuk menuju fungsi admin, menggunakan fxmlloader
         itemEntryButton.setOnAction(event -> switchToItemEntry(event));
         activityLogButton.setOnAction(event -> switchToActivityLog(event));
         transactionLogButton.setOnAction(event -> switchToTransactionLog(event));

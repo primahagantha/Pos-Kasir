@@ -58,13 +58,14 @@ public class itemEntryController implements Initializable {
     @FXML
     public void initialize(URL url, ResourceBundle rb) {
         try {
+            //menampilkan data di didatabase menggunakan setter
             items = FXCollections.observableArrayList(ItemEntry_db.getAllItems());
             itemTableView.setItems(items);
-
             idColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getId()).asObject());
             namaColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
             hargaColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getPrice()).asObject());
 
+            // button untuk simpan item yang di tambahkan
             simpanButton.setOnAction(events -> {
                 try {
                     handleSimpanButton(events);
@@ -72,6 +73,7 @@ public class itemEntryController implements Initializable {
                     throw new RuntimeException(e);
                 }
             });
+            // button untuk delete item yang di select barisnya
 
             deleteButton.setOnAction(e -> {
                 try {
@@ -80,6 +82,7 @@ public class itemEntryController implements Initializable {
                     throw new RuntimeException(ex);
                 }
             });
+            // button untuk tambahkan item
 
             tambahButton.setOnAction(event -> {
                 try {
@@ -88,7 +91,7 @@ public class itemEntryController implements Initializable {
                     throw new RuntimeException(e);
                 }
 
-
+            //fungsi untuk memilih baris yang ingin di tampilkan date lebih detail
             });
             itemTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
                 if (newSelection != null) {

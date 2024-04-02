@@ -64,31 +64,28 @@ public class activityLogController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        populateTable();
 
+        //print all data from database
+        populateTable();
+        //datepicker for select date
         datePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
             filterLogsByDate(newValue);
         });
 
-        // Added for Clear button functionality
+        // Clear/Refresh button
         clearButton.setOnAction(event -> {
             datePicker.setValue(null);
             tableView.getItems().clear();
             populateTable();
         });
 
-        switchToMenu.setOnAction(event -> {
-            try {
-                handleBackToMenu(event);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        });
+
+        //select table
         tableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 populateTextFields(newSelection);
             } else {
-                clearTextFields(); // Clear text fields when no row is selected
+                clearTextFields();
             }
         });
     }

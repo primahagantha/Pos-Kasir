@@ -92,12 +92,12 @@
    </VBox>
    <VBox fillWidth="false" prefHeight="374.0" prefWidth="430.0">
       <children>
-         <TableView fx:id="table_data" prefHeight="366.0" prefWidth="724.0" style="-fx-border-color: grey;">
+         <TableView fx:id="table_data" editable="true" prefHeight="366.0" prefWidth="724.0" style="-fx-border-color: grey;">
            <columns>
              <TableColumn fx:id="table_code" editable="false" prefWidth="69.60000991821289" style="-fx-alignment: CENTER;" text="Kode" />
                <TableColumn fx:id="table_name" editable="false" prefWidth="240.8000030517578" style="-fx-alignment: CENTER;" text="Nama" />
                <TableColumn fx:id="table_single_price" editable="false" prefWidth="126.39996337890625" style="-fx-alignment: CENTER;" text="Harga Satuan" />
-               <TableColumn fx:id="table_amount" onEditCommit="#setJumlah" prefWidth="89.60003662109375" style="-fx-alignment: CENTER;" text="Jumlah" />
+               <TableColumn fx:id="table_amount" onEditCommit="#setJumlahCell" prefWidth="89.60003662109375" style="-fx-alignment: CENTER;" text="Jumlah" />
                <TableColumn fx:id="table_total" editable="false" prefWidth="125.60003662109375" style="-fx-alignment: CENTER;" text="Total" />
                <TableColumn fx:id="table_action" editable="false" prefWidth="66.4000244140625" sortable="false" style="-fx-alignment: CENTER;" text="Action" />
            </columns>

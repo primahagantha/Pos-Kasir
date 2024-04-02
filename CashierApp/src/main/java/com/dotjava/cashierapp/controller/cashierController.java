@@ -59,6 +59,10 @@ public class cashierController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         welcomeText.setText("Selamat Datang, " + userSession_service.getUserFullName() + " !");
+        System.out.println(userSession_service.getUserId());
+        System.out.println(userSession_service.getUserName());
+        System.out.println(userSession_service.getUserFullName());
+
         table_amount.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         loadData();
     }

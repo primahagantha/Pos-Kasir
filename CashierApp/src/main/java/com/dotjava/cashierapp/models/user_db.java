@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 
 import com.dotjava.cashierapp.service.userSession_service;
 
@@ -65,7 +66,7 @@ public class user_db {
 
     public static Integer setUserActivity(String actType){
         try{
-            String query = "INSERT INTO `activity_log`(`id_act`, `tipe_act`, `id_user`, `username`, `date`) VALUES (?,?,?,?,?)";
+            String query = "INSERT INTO `activity_log`(`id_act`, `tipe_act`, `id_user`, `username`) VALUES (?,?,?,?)";
 
             PreparedStatement statement = db_config.conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
@@ -73,7 +74,7 @@ public class user_db {
             statement.setString(2, actType);
             statement.setString(3, userSession_service.getUserId());
             statement.setString(4, userSession_service.getUserName());
-            statement.setNull(5, java.sql.Types.NULL);
+
 
             int affectedRows = statement.executeUpdate();
             int insertedIdActivity = 0;

@@ -55,11 +55,12 @@ public class cashierController implements Initializable {
     @FXML private TableColumn<ItemBought, Integer> table_total;
     @FXML private TableColumn<ItemBought, Void> table_action;
 
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         welcomeText.setText("Selamat Datang, " + userSession_service.getUserFullName() + " !");
-        loadData();
         table_amount.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        loadData();
     }
 
     @FXML
@@ -134,7 +135,16 @@ public class cashierController implements Initializable {
 
     @FXML
     public void loadData  () {
-        Callback<TableColumn<ItemBought, Void>, TableCell<ItemBought, Void>> cellFactory = new Callback<>() {
+
+        table_amount.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+
+        table_code.setCellValueFactory(new PropertyValueFactory<ItemBought, String>("code"));
+        table_name.setCellValueFactory(new PropertyValueFactory<ItemBought, String>("name"));
+        table_single_price.setCellValueFactory(new PropertyValueFactory<ItemBought, String>("price"));
+        table_amount.setCellValueFactory(new PropertyValueFactory<ItemBought, Integer>("jumlah"));
+        table_total.setCellValueFactory(new PropertyValueFactory<ItemBought, Integer>("total"));
+
+        Callback<TableColumn<ItemBought, Void>, TableCell<ItemBought, Void>> deleteButton = new Callback<>() {
             @Override
             public TableCell<ItemBought, Void> call(final TableColumn<ItemBought, Void> param) {
                 return new TableCell<>() {
@@ -167,23 +177,17 @@ public class cashierController implements Initializable {
             }
         };
 
-        table_action.setCellFactory(cellFactory);
-
-        table_code.setCellValueFactory(new PropertyValueFactory<ItemBought, String>("code"));
-        table_name.setCellValueFactory(new PropertyValueFactory<ItemBought, String>("name"));
-        table_single_price.setCellValueFactory(new PropertyValueFactory<ItemBought, String>("price"));
-        table_amount.setCellValueFactory(new PropertyValueFactory<ItemBought, Integer>("jumlah"));
-        table_total.setCellValueFactory(new PropertyValueFactory<ItemBought, Integer>("total"));
-//        table_action.setCellValueFactory(new PropertyValueFactory<ItemBought, Button>("total"));
-//        table_data.getColumns().add(table_action);
+        table_action.setCellFactory(deleteButton);
 
     }
 
-    public void setJumlah(TableColumn.CellEditEvent<ItemBought, Integer> itemBoughtIntegerCellEditEvent) {
+    public void setJumlahCell(TableColumn.CellEditEvent<ItemBought, Integer> itemBoughtIntegerCellEditEvent) {
+
         ItemBought editedItemBought = table_data.getSelectionModel().getSelectedItem();
         editedItemBought.setJumlah(itemBoughtIntegerCellEditEvent.getNewValue());
         totalBelanja.setText("Total Belanja :   " + Integer.toString(countTotalBelanja()));
         table_data.refresh();
+
     }
 
 
@@ -226,4 +230,5 @@ public class cashierController implements Initializable {
         userSession_service.cleanSession();
         sceneController.switchToLogin(actionEvent);
     }
+
 }
